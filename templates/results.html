@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BLRS - Recommended Locations</title>
+    <script src="{{ url_for('static', filename='services.js') }}"></script>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='ico/logo.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='results.css') }}">
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDiXCITzDUD_jcycku6v-AtOooHbPNnXFk"></script> <!-- Replace with your actual API key -->
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <h1>BLRS - Recommended Locations</h1>
+            <nav>
+                <ul>
+                    <li><a href="{{ url_for('index') }}">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="pricing.html">Pricing</a></li>
+                    <li><a href="details.html">BLRS</a></li>
+                    <li><a href="signup.html">Sign Up</a></li>
+                    <li><a href="signin.html">Sign In</a></li>
+                    <li><a href="signout.html">Sign Out</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <h1>Recommended Locations</h1>
+        <div id="mapContainer" style="height: 500px; width: 100%;"></div>
+        <div id="recommendationResults"></div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 BLRS - Philipp Amana Working. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function displayRecommendations(recommendations) {
+            const resultsContainer = document.getElementById('recommendationResults');
+            resultsContainer.innerHTML = ''; // Clear previous results
+
+            // Loop through recommendations and display them
+            recommendations.forEach((location, index) => {
+                const resultDiv = document.createElement('div');
+                resultDiv.classList.add('location-result');
+                resultDiv.innerHTML = `<h4>${location.name}</h4>
+                                        <p><strong>Price:</strong> ${location.price}</p>
+                                        <p><strong>Target Audience:</strong> ${location.target_audience}</p>
+                                        <p><strong>Foot Traffic:</strong> ${location.foot_traffic}</p>
+                                        <p><strong>Affordability:</strong> ${location.affordability}</p>
+                                        <p><strong>Resources:</strong> ${location.resources}</p>
+                                        <p><strong>Revenue Potential:</strong> ${location.revenue_potential}</p>
+                                        <p><strong>Competitors:</strong> ${location.competitors}</p>
+                                        <p><strong>Business Category:</strong> ${location.business_category}</p>
+                                        <p><strong>Income:</strong> ${location.income}</p>
+                                        <p><strong>Budget:</strong> ${location.budget}</p>
+                                        <p><strong>Nearness to Market:</strong> ${location.nearness_to_market}</p>
+                                        <p><strong>Sustainability:</strong> ${location.sustainability}</p>
+                                        <p><strong>Road Connection:</strong> ${location.road_connection}</p>
+                                        <p><strong>Business Success:</strong> ${location.business_success}</p>
+                                        <p><strong>Business Growth:</strong> ${location.business_growth}</p>
+                                        <p><strong>Government Policies:</strong> ${location.government_policies}</p>`;
+
+                resultsContainer.appendChild(resultDiv);
+
+                // Add marker to map for this location
+                if (index === 0) {
+                    // Set map to center on the first location
+                    const mapOptions = {
+                        center: { lat: location.lat, lng: location.lng },
+                        zoom: 12,
+                    };
+                    const map = new google.maps.Map(document.getElementById('mapContainer'), mapOptions);
+
+                    // Add marker for each recommendation
+                    new google.maps.Marker({
+                        position: { lat: location.lat, lng: location.lng },
+                        map: map,
+                        title: location.name
+                    });
+                }
+            });
+        }
+
+        function fetchRecommendations() {
+            // Fetch recommendations from server
+            fetch('/get_recommendations')  // Update route if necessary
+                .then(response => response.json())
+                .then(data => {
+                    displayRecommendations(data.recommendations);  // Send recommendations to display function
+                })
+                .catch(error => {
+                    console.error('Error fetching recommendations:', error);
+                });
+        }
+
+        window.onload = fetchRecommendations;  // Fetch recommendations when page loads
+    </script>
+</body>
+</html>

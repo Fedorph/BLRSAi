@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy | BLRS</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='ico/logo.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='privacy-policy.css') }}">
+</head>
+<body>
+
+<header>
+    <div class="header-container">
+        <div class="header-logo">
+            <img src="{{ url_for('static', filename='logo/blrs.png') }}" alt="BLRS Logo">
+            <h1>BLRS</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('about') }}">About</a></li>
+                <li><a href="{{ url_for('services') }}">Services</a></li>
+                <li><a href="{{ url_for('contact') }}">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<div class="container">
+    <h1>Privacy Policy</h1>
+    <p><strong>Effective Date:</strong> August 20, 2024</p>
+
+    <h2>1. Introduction</h2>
+    <p>Welcome to BLRS, a Business Location Recommendation System developed by Philipp Amana, based in Kaduna, Nigeria. This privacy policy outlines how he collect, use, and protect your personal information when you use the services. He is committed to safeguarding your privacy and ensuring that your personal data is handled securely and responsibly.</p>
+
+    <h2>2. Information We Collect</h2>
+    <p>We may collect the following types of information:</p>
+    <ul>
+        <li><strong>Personal Information:</strong> When you register or interact with the services, we may collect your name, email address, phone number, and other contact details.</li>
+        <li><strong>Location Data:</strong> To provide tailored business location recommendations, we collect GPS coordinates or other location-based data from your device.</li>
+        <li><strong>Usage Data:</strong> We collect information about how you use our services, including search queries, locations you visit, and interaction patterns with our platform.</li>
+        <li><strong>Device Information:</strong> We gather details about the device you use to access BLRS, such as IP address, browser type, operating system, and other diagnostic data.</li>
+    </ul>
+
+    <h2>3. How We Use Your Information</h2>
+    <p>The information we collect is used for the following purposes:</p>
+    <ul>
+        <li><strong>Personalization:</strong> To provide you with customized business location recommendations based on your preferences and location data.</li>
+        <li><strong>Service Improvement:</strong> To analyze user behavior and preferences, helping us to improve and enhance our services.</li>
+        <li><strong>Communication:</strong> To communicate with you regarding updates, offers, promotions, or any issues related to your use of our services.</li>
+        <li><strong>Security:</strong> To monitor and ensure the security and integrity of our platform, protecting against fraud, unauthorized access, or other threats.</li>
+    </ul>
+
+    <h2>4. Data Sharing and Disclosure</h2>
+    <p>Your personal information will not be sold to third parties. However, we may share your information in the following circumstances:</p>
+    <ul>
+        <li><strong>Service Providers:</strong> We may share your information with trusted third-party service providers who assist us in operating our platform, such as data analytics providers, customer support services, and marketing agencies. These providers are bound by confidentiality obligations and are only permitted to use your data for specified purposes.</li>
+        <li><strong>Legal Compliance:</strong> If required by law or in response to valid requests by public authorities, we may disclose your information to comply with legal obligations or to protect our rights, property, and the safety of our users.</li>
+    </ul>
+
+    <h2>5. Data Security</h2>
+    <p>We implement robust technical and organizational measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction. While we strive to use commercially acceptable means to protect your data, no method of transmission over the Internet or method of electronic storage is 100% secure, and we cannot guarantee its absolute security.</p>
+
+    <h2>6. Your Rights</h2>
+    <p>You have the following rights regarding your personal information:</p>
+    <ul>
+        <li><strong>Access:</strong> You can request a copy of the personal information we hold about you.</li>
+        <li><strong>Correction:</strong> You can request that we correct any inaccuracies in your personal information.</li>
+        <li><strong>Deletion:</strong> You can request the deletion of your personal information, subject to legal or contractual obligations.</li>
+        <li><strong>Opt-Out:</strong> You can opt out of receiving marketing communications from us at any time by following the unsubscribe instructions in our emails or by contacting us directly.</li>
+    </ul>
+
+    <h2>7. Cookies and Tracking Technologies</h2>
+    <p>BLRS may use cookies and similar tracking technologies to enhance your user experience. Cookies help us understand how you use our platform, allowing us to provide you with a more personalized experience. You can manage your cookie preferences through your browser settings.</p>
+
+    <h2>8. Changes to This Privacy Policy</h2>
+    <p>We may update this privacy policy periodically to reflect changes in our practices or for other operational, legal, or regulatory reasons. Any changes will be posted on this page with an updated effective date. We encourage you to review this policy regularly to stay informed about how we protect your information.</p>
+
+    <h2>9. Contact Us</h2>
+    <p>If you have any questions or concerns about this privacy policy or our data practices, please contact us at:</p>
+    <div class="contact-info">
+        <p><strong>BLRSAi</strong></p>
+        <p>Kaduna, Nigeria</p>
+        <p>Email: hi@blrsai.com</p>
+        <p>LinkedIn: <a href="https://www.linkedin.com/company/blrsai" target="_blank">BLRSAi</a></p>
+    </div>
+</div>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-logo">
+            <img src="{{ url_for('static', filename='logo/situated_white.png') }}" alt="Situated Logo">
+            <p>&copy; 2024 BLRS. All rights reserved.</p>
+        </div>
+        <p><a href="{{ url_for('privacy_policy') }}">Privacy Policy</a> | <a href="{{ url_for('terms_of_service') }}">Terms of Service</a> | <a href="{{ url_for('contact') }}">Contact Us</a></p>
+    </div>
+</footer>
+
+<script src="{{ url_for('static', filename='privacy-policy.js') }}"></script>
+</body>
+</html>

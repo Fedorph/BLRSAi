@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sign up for our Business Location Recommendation System, leveraging location intelligence for optimal business locations.">
+    <meta name="keywords" content="business location, location intelligence, location analytics, google maps, recommendations, business location recommendation system, situated, position, area, platform">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Philipp Amana">
+    <title>Situated</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='ico/logo.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+    <script src="{{ url_for('static', filename='home.js') }}" defer></script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <img src="{{ url_for('static', filename='logo/blrs.png') }}" alt="BLRS Logo" class="logo-img">
+            <h1 class="logo">BLRS</h1>
+            <div class="hamburger-menu" id="hamburger-menu">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+            <nav id="menu" class="menu">
+                <ul class="nav-links">
+                    <li><a href="details.html">DETAILS</a></li>
+                    <li><a href="about.html">ABOUT</a></li>
+                    <li><a href="learn.html">LEARN MORE</a></li>
+                    <li><a href="contact-us.html">CONTACT US</a></li>
+                    <li><a href="support.html">SUPPORT</a></li>
+                    <li><a href="features.html">FEATURES</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <section id="home" class="hero-section">
+        <div class="container" style="position: relative; text-align: center; color: #fff;">
+            <div class="hero-content" style="background: rgba(0, 0, 0, 0.6); padding: 20px; border-radius: 10px; display: inline-block;">
+                <h2 style="font-size: 2rem; font-weight: bold;">Find the Perfect Location for Your Business</h2>
+                <p style="font-size: 1.2rem; font-weight: bold;">Our advanced recommendation system helps you find the best location to set up your business, tailored to your unique needs and preferences.</p>
+                <a href="learn.html" style="display: inline-block; background-color: #ffffff; color: #000080; padding: 10px 20px; text-decoration: none; font-weight: bold; border-radius: 5px;">Learn More</a>
+            </div>
+        </div>
+    </section>
+    <section id="features" class="features-section">
+        <div class="container">
+            <h2>Features</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h3>Personalized Recommendations</h3>
+                    <p>Receive location recommendations based on your business type and preferences.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Data-Driven Insights</h3>
+                    <p>Make informed decisions with insights based on real data and analysis.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-search"></i>
+                    <h3>Comprehensive Search</h3>
+                    <p>Explore a wide range of locations to find the perfect spot for your business.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="how-it-works" class="how-it-works-section">
+        <div class="container">
+            <h2>How It Works</h2>
+            <div class="how-it-works-grid">
+                <div class="step">
+                    <i class="fas fa-user"></i>
+                    <h3>Step 1: Sign Up</h3>
+                    <p>Create an account and provide information about your business.</p>
+                </div>
+                <div class="step">
+                    <i class="fas fa-th-list"></i>
+                    <h3>Step 2: Set Preferences</h3>
+                    <p>Input your business type and set your location preferences.</p>
+                </div>
+                <div class="step">
+                    <i class="fas fa-check"></i>
+                    <h3>Step 3: Get Recommendations</h3>
+                    <p>Receive tailored location recommendations and choose the best one for you.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="about" class="about-section">
+        <div class="container">
+            <h2>About</h2>
+            <div class="developer-info">
+                <img src="{{ url_for('static', filename='img/philippamana.jpg') }}" alt="Philipp Amana" class="developer-photo">
+                <div>
+                    <h3>Developer</h3>
+                    <p><strong>Philipp Amana</strong> is the visionary developer behind <strong>BLRS</strong>. With a profound background in software engineering and an unyielding passion for leveraging technology, the desire to learn Artificial Intelligence and Machine Learning to solve real-world challenges, Philipp has crafted a groundbreaking idea and decided to transform it into a platform for businesses. His innovative thinking approach ensures businesses find their ideal locations, fostering success and growth in an increasingly competitive market.</p>
+                </div>
+            </div>
+            <div class="app-description">
+                <img src="{{ url_for('static', filename='logo/blrs.jpg') }}" height="100" width="100" alt="Situated" class="app-photo">
+                <div>
+                    <h3>App</h3>
+                    <p><strong>BLRS</strong> is a Business Location Recommendation System designed to provide personalized location recommendations based on data-driven insights. Whether you're starting a new business or looking to expand, BLRS helps you find the ideal spot to meet your unique needs and preferences. The platform combines comprehensive search capabilities with advanced analytics to ensure you make informed decisions about your business location.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <form id="contact-form" method="POST" action="contact.php">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" placeholder="John Set" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" placeholder="johnset@gmail.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" placeholder="I'm Interested to try out your system." required></textarea>
+                </div>
+                <button type="submit" class="btn">Send Message</button>
+            </form>
+        </div>
+    </section>
+    <footer class="footer-bottom">
+        <div class="container">
+            <img src="{{ url_for('static', filename='logo/blrs.png') }}" height="30" width="30" alt="Situated Logo" class="footer-logo">
+            <p>&copy; 2024 BLRS - Philipp Amana Production</p>
+            <p>All Rights Reserved</p>
+        </div>
+    </footer>
+</body>
+</html>

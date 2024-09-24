@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services - BLRS</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='ico/logo.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='services.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <img src="{{ url_for('static', filename='logo/blrs.png') }}" alt="BLRS Logo" class="logo">
+            <h1 class="logo-name">BLRS</h1>
+            <nav>
+                <ul>
+                    <li><a href="{{ url_for('home') }}">Home</a></li>
+                    <li><a href="{{ url_for('about') }}">About</a></li>
+                    <li><a href="{{ url_for('services') }}">Services</a></li>
+                    <li><a href="{{ url_for('signup') }}">Sign Up</a></li>
+                    <li><a href="{{ url_for('signin') }}">Sign In</a></li>
+                    <li><a href="{{ url_for('contact') }}">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="services">
+            <div class="container">
+                <h2>Discover Our Unique Services</h2>
+                <div class="service-card" data-aos="fade-up">
+                    <div class="service-icon">🔍</div>
+                    <h3>Precision Location Analysis</h3>
+                    <p>Uncover the ideal locations for your business with our cutting-edge analysis tools. Our data-driven insights ensure you’re in the right place at the right time.</p>
+                    <button class="btn" onclick="learnMore('location-analysis')">Learn More</button>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="service-icon">📊</div>
+                    <h3>Market Trend Insights</h3>
+                    <p>Stay ahead of the curve with our comprehensive market trend analysis. Understand consumer behavior and market dynamics to make strategic decisions.</p>
+                    <button class="btn" onclick="learnMore('market-insights')">Learn More</button>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="service-icon">🏆</div>
+                    <h3>Competitive Edge Analysis</h3>
+                    <p>Get the competitive advantage with our in-depth analysis of your competitors. Identify opportunities, threats, and strategies to outpace your rivals.</p>
+                    <button class="btn" onclick="learnMore('competitor-analysis')">Learn More</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 BLRS. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='services.js') }}"></script>
+    <script>
+        AOS.init(); // Initialize AOS (Animate On Scroll) library
+    </script>
+</body>
+</html>

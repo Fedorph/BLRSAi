@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BLRSAi: How It Works</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='ico/logo.ico') }}"> <!-- Favicon link updated for Flask -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/blrs-ai.css') }}"> <!-- Link to CSS file for Flask -->
+</head>
+<body>
+    <header>
+        <div class="container">
+            <img src="{{ url_for('static', filename='logo/blrs.png') }}" alt="BLRS Logo" class="logo"> <!-- Image path updated for Flask -->
+            <h1>BLRSAi: How It Works</h1>
+            <nav>
+                <ul>
+                    <li><a href="{{ url_for('home') }}">Home</a></li> <!-- Flask route example -->
+                    <li><a href="{{ url_for('about') }}">About</a></li> <!-- Flask route example -->
+                    <li><a href="{{ url_for('contact') }}">Contact</a></li> <!-- Flask route example -->
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="how-it-works">
+            <div class="container">
+                <h2>Understanding BLRSAi</h2>
+                <p>Our Business Location Recommendation System Ai (BLRSAi) is designed to provide optimal location recommendations using advanced machine learning models. These models analyze various data points to suggest the best locations for your business.</p>
+
+                <h3>Machine Learning Models Used</h3>
+                <ul>
+                    <li><strong>Linear Regression:</strong> Predicts business success based on location data.</li>
+                    <li><strong>K-Means Clustering:</strong> Groups locations based on similarity in features like foot traffic, competition, and demographics.</li>
+                    <li><strong>Random Forest:</strong> Enhances prediction accuracy by combining multiple decision trees to assess various factors impacting location suitability.</li>
+                    <li><strong>Neural Networks:</strong> Processes large datasets to identify non-linear patterns and relationships in location data.</li>
+                </ul>
+
+                <h3>Objectives of BLRSAi</h3>
+                <p>BLRS AI aims to achieve the following objectives:</p>
+                <ol>
+                    <li>Provide precise location recommendations tailored to the unique needs of businesses.</li>
+                    <li>Utilize data-driven insights to enhance decision-making in location selection.</li>
+                    <li>Continuously improve and adapt models based on user feedback and market trends.</li>
+                </ol>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 BLRS. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/blrs-ai.js') }}"></script> <!-- Link to JavaScript file for Flask -->
+</body>
+</html>

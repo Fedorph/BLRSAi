@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/x-icon" href="favicon/favicon.ico">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact page for BLRS. Reach out to us for any questions or assistance.">
+    <meta name="keywords" content="Contact, BLRS, BLRSAi, Situated, Located, Ai, Support, Customer Service">
+    <meta name="author" content="Philipp Amana">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Contact Us - Situated">
+    <meta property="og:description" content="Contact page for BLRS. Reach out to us for any questions or assistance.">
+    <meta property="og:image" content="logos/blrs.png">
+    <meta property="og:url" content="https://www.sarvince.com/contact-us.html">
+    <meta property="og:type" content="website">
+
+    <title>Contact Us - BLRS</title>
+    <link rel="stylesheet" href="contact-us.css">
+    <script src="contact-us.js" defer></script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <img src="logos/BLRS.png" alt="BLRS Logo" class="logo">
+            <div class="logo-name">BLRS</div>
+            <nav>
+                <ul>
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="signup.html">Sign Up</a></li>
+                    <li><a href="signin.html">Sign In</a></li>
+                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                    <li><a href="terms-of-service.html">Terms of Service</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <section class="contact-us">
+                <h1>Contact Us</h1>
+                <p>If you have any questions or need further assistance, please feel free to reach out to us using the form below or through our contact information.</p>
+                
+                <form action="submit_contact_form.php" method="post" class="contact-form">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
+
+                <div class="contact-info">
+                    <h2>Our Contact Information</h2>
+                    <p>Email: <a href="mailto:support@blrsai.com">support@blrsai.com</a></p>
+                    <p>Phone: Coming Soon</p>
+                    <p>Address: Kaduna, Nigeria</p>
+                </div>
+            </section>
+        </div>
+    </main>
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 BLRS - A Philipp Amana Production. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

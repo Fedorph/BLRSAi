@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/x-icon" href="ico/logo.ico">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sign in to our Business Location Recommendation System, leveraging location intelligence for optimal business locations.">
+    <meta name="keywords" content="business location, location intelligence, location analytics, google maps, recommendations, business location recommendation system, situated, position, area, platform">
+    <meta name="robots" content="index, follow">
+    <title>Sign In - Pointar</title>
+    <link rel="stylesheet" href="signin.css">
+</head>
+<body>
+    <div class="login-container">
+        <header>
+            <center>
+                <img src="LOGO/pointar_brand.png" height="100" width="100" alt="Pointar LOGO">
+            </center>
+            <h1>SIGN IN</h1>
+        </header>
+        <main>
+            <form id="loginForm">
+                <div class="input-group">
+                    <label for="email/phone">Email/Phone Number:</label>
+                    <input type="text" id="email_or_phone" name="email_or_phone" placeholder="Enter your email or phone number" required>
+                </div>
+                <div class="input-group password-container">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                    <span class="toggle-password" onclick="togglePasswordVisibility()">
+                        <img id="togglePasswordIcon" src="icon/eye-crossed.png" alt="Show/Hide Password">
+                    </span>
+                </div>
+                <button type="submit" class="login-button">Sign In</button>
+                <div class="extra-links">
+                    <a href="reset.html" class="forgot-password">Forgot Password?</a>
+                    <a href="signup.html" class="signup-button" style="background-color: #000080; padding: 10px 15px; border-radius: 5px; color: #fff; text-decoration: none; display: inline-block; margin-top: 10px;">Sign Up</a>
+                </div>
+                <p id="error-message" style="color: red; margin-top: 15px;"></p>
+            </form>
+        </main>
+    </div>
+    <script src="signin.js"></script>
+</body>
+</html>

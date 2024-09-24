@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support: BLRS</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='ico/logo.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='support.css') }}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <img src="{{ url_for('static', filename='logo/blrs.png') }}" alt="BLRS Logo" class="logo">
+            <h1 class="logo-name">BLRS</h1>
+            <nav>
+                <ul>
+                    <li><a href="{{ url_for('home') }}">Home</a></li>
+                    <li><a href="{{ url_for('about') }}">About</a></li>
+                    <li><a href="{{ url_for('services') }}">Services</a></li>
+                    <li><a href="{{ url_for('explore') }}">Explore</a></li>
+                    <li><a href="{{ url_for('learn') }}">Learn More</a></li>
+                    <li><a href="{{ url_for('glossary') }}">Glossary</a></li>
+                    <li><a href="{{ url_for('settings') }}">Settings</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="support">
+            <div class="container">
+                <h2>How to Use Our Business Location Recommendation System (BLRS)</h2>
+                
+                <h3>1. Getting Started</h3>
+                <p>To begin using our BLRS, follow these steps:</p>
+                <ul>
+                    <li>Visit the <a href="{{ url_for('home') }}">homepage</a> and either <a href="{{ url_for('signup') }}">sign up</a> for a new account or <a href="{{ url_for('signin') }}">log in</a> if you already have an account.</li>
+                    <li>Once logged in, you’ll be directed to your dashboard where you can start setting up your profile.</li>
+                </ul>
+                
+                <h3>2. Setting Up Your Profile</h3>
+                <p>To ensure accurate recommendations, set up your profile with the following details:</p>
+                <ul>
+                    <li>Business name, type, and description</li>
+                    <li>Preferred locations and target market</li>
+                    <li>Any specific requirements or preferences you might have</li>
+                </ul>
+                <p>Navigate to your profile settings from the top-right corner and enter these details.</p>
+                
+                <h3>3. Exploring Locations</h3>
+                <p>Use the search and filter options to find potential locations for your business:</p>
+                <ul>
+                    <li>Enter keywords related to your business type and preferred location.</li>
+                    <li>Use filters to narrow down results based on factors like demographics, competition, and accessibility.</li>
+                </ul>
+                <p>Explore the recommendations and view details on each location.</p>
+                
+                <h3>4. Analyzing Recommendations</h3>
+                <p>Review the detailed reports provided for each recommended location:</p>
+                <ul>
+                    <li>Understand the market potential and demographic information.</li>
+                    <li>Compare factors like rental costs, foot traffic, and proximity to competitors.</li>
+                </ul>
+                <p>Use these insights to determine which locations best meet your business needs.</p>
+                
+                <h3>5. Saving and Comparing Locations</h3>
+                <p>Make use of our saving and comparison features:</p>
+                <ul>
+                    <li>Save locations you're interested in to a personal list for easy access.</li>
+                    <li>Use the comparison tool to evaluate multiple locations side-by-side based on various criteria.</li>
+                </ul>
+                <p>This will help you make an informed decision when selecting the best location for your business.</p>
+                
+                <h3>6. Seeking Assistance</h3>
+                <p>If you need help or have questions:</p>
+                <ul>
+                    <li>Check our <a href="{{ url_for('faq') }}">FAQ</a> section for common queries.</li>
+                    <li>Contact our support team through the <a href="{{ url_for('contact-us') }}">contact page</a> or email us directly at <a href="mailto:support@situated.com">support@situated.com</a>.</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 BLRS. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- External JavaScript file -->
+    <script src="{{ url_for('static', filename='support.js') }}"></script>
+</body>
+</html>

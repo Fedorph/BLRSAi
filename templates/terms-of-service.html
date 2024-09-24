@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service - BLRS</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='ico/logo.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='terms-of-service.css') }}">
+    <script defer src="{{ url_for('static', filename='terms-of-service.js') }}"></script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <img src="{{ url_for('static', filename='logo/blrs.png') }}" alt="Situated Logo" class="logo">
+            <div class="logo-name">BLRS</div>
+            <nav>
+                <ul>
+                    <li><a href="{{ url_for('home') }}">Home</a></li>
+                    <li><a href="{{ url_for('services') }}">Services</a></li>
+                    <li><a href="{{ url_for('signup') }}">Sign Up</a></li>
+                    <li><a href="{{ url_for('signin') }}">Sign In</a></li>
+                    <li><a href="{{ url_for('privacy_policy') }}">Privacy Policy</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <section class="terms-of-service">
+                <h1>Terms of Service</h1>
+                <p>Last updated: August 20, 2024</p>
+                
+                <h2>1. Acceptance of Terms</h2>
+                <p>By accessing and using BLRS's services, you agree to be bound by these Terms of Service. If you do not agree with any part of these terms, you must not use our services.</p>
+                
+                <h2>2. Services Provided</h2>
+                <p>BLRS offers a Business Location Recommendation System designed to help users find optimal business locations. We reserve the right to modify or discontinue our services at any time without prior notice.</p>
+                
+                <h2>3. User Responsibilities</h2>
+                <p>You are responsible for maintaining the confidentiality of your account and any activities that occur under your account. You agree to notify us immediately of any unauthorized use of your account.</p>
+                
+                <h2>4. Restrictions</h2>
+                <p>You may not use our services for any illegal or unauthorized purpose. You must not interfere with or disrupt the operation of our services or servers.</p>
+                
+                <h2>5. Intellectual Property</h2>
+                <p>All content and materials provided by BLRS are the property of Philipp Amana and are protected by copyright and intellectual property laws. You may not reproduce, distribute, or create derivative works from our content without our express permission.</p>
+                
+                <h2>6. Limitation of Liability</h2>
+                <p>BLRS is not liable for any indirect, incidental, or consequential damages arising from the use of our services. Our liability is limited to the maximum extent permitted by law.</p>
+                
+                <h2>7. Changes to Terms</h2>
+                <p>We may update these Terms of Service from time to time. We will notify you of any changes by posting the new terms on our website. Your continued use of our services after any changes indicates your acceptance of the revised terms.</p>
+                
+                <h2>8. Contact Us</h2>
+                <p>If you have any questions or concerns about these Terms of Service, please contact us via <a href="mailto:support@blrsai.com">support@blrsai.com</a>.</p>
+            </section>
+        </div>
+    </main>
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 BLRS. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="scrollTopBtn" title="Go to top">Top</button>
+    
+    <!-- JavaScript for the "Back to Top" button functionality -->
+    <script>
+        document.getElementById('scrollTopBtn').addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>

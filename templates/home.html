@@ -1,0 +1,123 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Personalized dashboard for business location recommendations and updates.">
+    <meta name="keywords" content="dashboard, user home, business location, recommendations, updates, social, feed">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Philipp Amana">
+    <title>BLRS Home - Personalized Dashboard</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='ico/logo.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+    <script src="{{ url_for('static', filename='home.js') }}" defer></script>
+</head>
+<body>
+    <!-- HEADER AND NAVIGATION -->
+    <header>
+        <div class="container">
+            <img src="{{ url_for('static', filename='logo/blrs.png') }}" alt="BLRS Logo" class="logo-img">
+            <h1 class="logo">BLRS</h1>
+            <nav class="menu">
+                <ul class="nav-links">
+                    <li><a href="profile.html">Profile</a></li>
+                    <li><a href="notifications.html">Notifications</a></li>
+                    <li><a href="messages.html">Messages</a></li>
+                    <li><a href="settings.html">Settings</a></li>
+                    <li><a href="logout.html">Logout</a></li>
+                </ul>
+            </nav>
+            <div class="search-bar">
+                <input type="text" placeholder="Search for locations, recommendations...">
+                <button type="submit">Search</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- SIDEBAR AND MAIN CONTENT -->
+    <div class="main-container">
+        <!-- Sidebar: User Info, Quick Links, etc. -->
+        <aside class="sidebar">
+            <div class="user-profile">
+                <img src="{{ url_for('static', filename='img/philippamana.jpg') }}" alt="User Profile Photo" class="user-photo">
+                <h3>Philipp Amana</h3>
+                <p><a href="profile.html">View Profile</a></p>
+            </div>
+            <div class="quick-links">
+                <ul>
+                    <li><a href="my-locations.html">My Saved Locations</a></li>
+                    <li><a href="recommended.html">Recommended Locations</a></li>
+                    <li><a href="analytics.html">Business Analytics</a></li>
+                    <li><a href="support.html">Support</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Main content: Feed and recommendations -->
+        <main class="content">
+            <section class="status-update">
+                <h2>Post a Business Update</h2>
+                <form id="post-update-form" method="POST">
+                    <textarea id="status" name="status" placeholder="Share your latest business updates or location plans..."></textarea>
+                    <button type="submit" class="btn">Post</button>
+                </form>
+            </section>
+
+            <section class="feed">
+                <h2>Recent Recommendations and Updates</h2>
+                <div class="post">
+                    <img src="{{ url_for('static', filename='img/user1.jpg') }}" alt="User 1" class="post-user-photo">
+                    <div class="post-content">
+                        <h3>John Set</h3>
+                        <p>Recently found an amazing spot for my cafe at the city center! Thanks, BLRS!</p>
+                    </div>
+                </div>
+
+                <div class="post">
+                    <img src="{{ url_for('static', filename='img/user2.jpg') }}" alt="User 2" class="post-user-photo">
+                    <div class="post-content">
+                        <h3>Mary Jane</h3>
+                        <p>BLRS recommended the perfect location for my new boutique, couldn’t be happier!</p>
+                    </div>
+                </div>
+
+                <div class="post">
+                    <img src="{{ url_for('static', filename='img/user3.jpg') }}" alt="User 3" class="post-user-photo">
+                    <div class="post-content">
+                        <h3>Business Insights</h3>
+                        <p>New data shows that downtown areas have seen a 20% increase in foot traffic over the last month. Check out new recommended locations!</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Right sidebar: Extra widgets or links -->
+        <aside class="right-sidebar">
+            <section class="notifications">
+                <h3>Notifications</h3>
+                <ul>
+                    <li><a href="#">New location suggestions for your business type</a></li>
+                    <li><a href="#">Reminder: Update your location preferences</a></li>
+                </ul>
+            </section>
+
+            <section class="ads">
+                <h3>Sponsored</h3>
+                <div class="ad">
+                    <p>Upgrade to premium for more advanced location analytics!</p>
+                    <button class="btn">Upgrade Now</button>
+                </div>
+            </section>
+        </aside>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer-bottom">
+        <div class="container">
+            <img src="{{ url_for('static', filename='logo/blrs.png') }}" height="30" width="30" alt="BLRS Logo" class="footer-logo">
+            <p>&copy; 2024 BLRS - Philipp Amana Production</p>
+            <p>All Rights Reserved</p>
+        </div>
+    </footer>
+</body>
+</html>

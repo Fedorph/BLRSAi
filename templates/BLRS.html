@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon/favicon.ico') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sign up for ARareGPT, leveraging location intelligence for optimal business locations.">
+    <meta name="keywords" content="business location, location intelligence, location analytics, google maps, recommendations, business location recommendation system, ARareGPT, position, area, platform">
+    <meta name="robots" content="index, follow">
+    <title>BLRS Ai - Location Intelligence AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='blrs.css') }}">
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtTWPhyLWi0HzN0SyBkMEvmNaMhZFhl3I"></script> <!-- Replace YOUR_API_KEY with your actual Google Maps API key -->
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                
+                <h1>BLRS Ai</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="{{ url_for('Home') }}">Home</a></li>
+                    <li><a href="{{ url_for('About') }}">About</a></li>
+                    <li><a href="{{ url_for('Developer') }}">Developer</a></li>
+                    <li><a href="{{ url_for('BLRS-Ai') }}">BLRS Ai</a></li>
+                    <li><a href="{{ url_for('Learn') }}">Learn More</a></li>
+                    <li><a href="{{ url_for('Services') }}">Services</a></li>
+                    <li><a href="{{ url_for('support') }}">Support</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- Main Content -->
+        <main>
+            <!-- Recommendations Section -->
+            <section id="recommendations" class="recommendations-section">
+                <h2 id="recommendations">BLRS</h2>
+                <div class="recommendations-box">
+                    <form id="locationForm" method="POST" action="{{ url_for('process_location') }}" aria-labelledby="recommendations">
+                        <!-- Structured Business Details -->
+                        <fieldset>
+                            <legend>Business Details</legend>
+                            
+                            <label for="companyName">Company Name:</label>
+                            <input type="text" id="companyName" name="companyName" placeholder="e.g., Tech Innovators Ltd" required aria-required="true">
+                            
+                            <label for="income">Income (in NGN):</label>
+                            <input type="number" id="income" name="income" placeholder="e.g., 5000000" required aria-required="true">
+                            
+                            <label for="businessType">Business Type:</label>
+                            <select id="businessType" name="businessType">
+                                <option value="" disabled selected>Select Business Type</option>
+                                <option value="retail">Retail</option>
+                                <option value="technology">Technology</option>
+                                <option value="restaurant">Restaurant</option>
+                                <option value="service">Service</option>
+                            </select>
+                            
+                            <label for="businessSize">Business Size:</label>
+                            <select id="businessSize" name="businessSize">
+                                <option value="" disabled selected>Select Business Size</option>
+                                <option value="small">Small</option>
+                                <option value="medium">Medium</option>
+                                <option value="large">Large</option>
+                            </select>
+                            
+                            <label for="businessStructure">Business Structure:</label>
+                            <select id="businessStructure" name="businessStructure">
+                                <option value="" disabled selected>Select Business Structure</option>
+                                <option value="llc">LLC</option>
+                                <option value="corporation">Corporation</option>
+                                <option value="sole_proprietorship">Sole Proprietorship</option>
+                                <option value="partnership">Partnership</option>
+                            </select>
+                            
+                            <label for="businessCategory">Business Category:</label>
+                            <select id="businessCategory" name="businessCategory">
+                                <option value="" disabled selected>Select Company Category</option>
+                                <option value="technology">Technology</option>
+                                <option value="food_beverage">Food & Beverage</option>
+                                <option value="healthcare">Healthcare</option>
+                                <option value="education">Education</option>
+                            </select>
+                            
+                            <label for="budget">Budget (in NGN):</label>
+                            <input type="number" id="budget" name="budget" placeholder="e.g., 2000000" required aria-required="true">
+                            
+                            <label for="area">Local Government Area (Kaduna):</label>
+<select id="area" name="area" required aria-required="true">
+    <option value="" disabled selected>Select Local Government Area</option>
+    <!-- Major Districts -->
+    <option value="rigasa">Rigasa (Igabi LGA)</option>
+    <option value="mando">Mando (Igabi LGA)</option>
+    
+    <!-- LGAs in Kaduna -->
+    <option value="birnin_gwari">Birnin Gwari</option>
+    <option value="chikun">Chikun</option>
+    <option value="giwa">Giwa</option>
+    <option value="igabi">Igabi</option>
+    <option value="ikara">Ikara</option>
+    <option value="jaba">Jaba</option>
+    <option value="jema_a">Jema'a</option>
+    <option value="kachia">Kachia</option>
+    <option value="kaduna_north">Kaduna North</option>
+    <option value="kaduna_south">Kaduna South</option>
+    <option value="kagarko">Kagarko</option>
+    <option value="kajuru">Kajuru</option>
+    <option value="kauru">Kauru</option>
+    <option value="kawo">Kawo</option>
+    <option value="kubau">Kubau</option>
+    <option value="kudan">Kudan</option>
+    <option value="lere">Lere</option>
+    <option value="makarfi">Makarfi</option>
+    <option value="sabongari">Sabon Gari</option>
+    <option value="sanga">Sanga</option>
+    <option value="soba">Soba</option>
+    <option value="zangon_kataf">Zangon Kataf</option>
+    <option value="zaria">Zaria</option>
+</select>
+
+                            <label for="state">Arear:</label>
+                            <input type="text" id="state" name="state" placeholder="e.g., Kaduna" required aria-required="true">
+                        </fieldset>
+
+                        <!-- Unstructured Query Box -->
+                        <fieldset>
+                            <legend>Preferences</legend>
+                            
+                            <label for="preferences">Please, Enter your preferences or additional details:</label>
+                            <textarea id="preferences" name="preferences" placeholder="Type your preferences, additional information, or any other details here..." rows="6" aria-required="true"></textarea>
+                        </fieldset>
+                        
+                        <button type="submit">Get Recommendations</button>
+                    </form>
+                    <div id="recommendationResults" class="results">
+                        <!-- Results will be dynamically added here -->
+                    </div>
+                    
+                    <!-- Google Maps -->
+                    <section id="map" class="map-section">
+                        <h3>Business Location Map</h3>
+                        <div id="mapContainer" style="height: 500px; width: 100%;"></div>
+                    </section>
+                </div>
+            </section>
+
+            <!-- Features Section -->
+            <section id="features" class="features-section">
+                <h2>Features</h2>
+                <div class="feature-list">
+                    <div class="feature">
+                        <h3>Advanced Location Analysis</h3>
+                        <p>Utilizes GPT models to analyze market trends and recommend optimal business locations.</p>
+                    </div>
+                    <div class="feature">
+                        <h3>Customizable Criteria</h3>
+                        <p>Allows input of various business criteria to tailor recommendations specifically to your needs.</p>
+                    </div>
+                    <div class="feature">
+                        <h3>Data-Driven Insights</h3>
+                        <p>Provides data-backed recommendations with actionable insights for strategic business placement.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Settings Section -->
+            <section id="settings" class="settings-section">
+                <h2>Theme Settings</h2>
+                <form id="settingsForm" aria-labelledby="settings">
+                    <label for="theme">Theme:</label>
+                    <select id="theme" name="theme">
+                        <option value="light">Light</option>
+                        <option value="dark">Dark</option>
+                    </select>
+                    <br>
+                    <label for="notifications">Notifications:</label>
+                    <input type="checkbox" id="notifications" name="notifications" checked>
+                    <label for="notifications">Enable notifications</label>
+                    <br>
+                    <button type="submit">Save Changes</button>
+                </form>
+            </section>
+
+            <!-- Help Section -->
+            <section id="help" class="help-section">
+                <h2>Help & Support</h2>
+                <p>If you need assistance, please contact our support team or visit our <a href="contact-us.html">help center</a>.</p>
+            </section>
+        </main>
+
+        <!-- Scripts -->
+        <script src="{{ url_for('static', filename='blrs.js') }}"></script>
+        <script>
+            function initMap() {
+                const mapOptions = {
+                    center: { lat: 37.7749, lng: -122.4194 }, // Default center (San Francisco)
+                    zoom: 12,
+                };
+                const map = new google.maps.Map(document.getElementById('mapContainer'), mapOptions);
+
+                // Example marker
+                new google.maps.Marker({
+                    position: { lat: 37.7749, lng: -122.4194 },
+                    map: map,
+                    title: 'Display Location'
+                });
+            }
+
+            // Initialize map on page load
+            window.onload = initMap;
+        </script>
+
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2024 BLRS - A Philipp Amana Production. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>

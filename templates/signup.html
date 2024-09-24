@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/x-icon" href="ico/logo.ico">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sign up for our Business Location Recommendation System, leveraging location intelligence for optimal business locations.">
+    <meta name="keywords" content="business location, location intelligence, location analytics, google maps, recommendations, business location recommendation system, situated, position, area, platform">
+    <meta name="robots" content="index, follow">
+    <title>Sign Up: Pointar</title>
+    <link rel="stylesheet" href="signup.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <img src="logo/logo.png" alt="Pointar Logo" height="50" width="50" class="logo">
+            <h1>Pointar - Business Location Recommendation System</h1>
+        </div>
+    </header>
+    <div class="signup-wrapper">
+        <div class="signup-container">
+            <h2><center><font color="#000080">SIGN UP</font></center></h2>
+            <form id="signupForm" action="signup.php" method="POST">
+                <label for="full-name">Full Name:</label>
+                <input type="text" id="full-name" name="full-name" placeholder="Enter your full name" required>
+                
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" placeholder="Choose a username" required>
+                
+                <label for="companyname">Company Name:</label>
+                <input type="text" id="companyname" name="companyname" placeholder="Enter your company name" required>
+                
+                <label for="businesstype">Business Type:</label>
+                <input type="text" id="businesstype" name="businesstype" placeholder="Specify your business type" required>
+                
+                <label for="contact-info">Email/Phone Number:</label>
+                <input type="text" id="contact-info" name="contact-info" placeholder="Enter your email or phone number" required>
+                
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" placeholder="Create a password" required>
+                
+                <label><input type="checkbox" id="showPassword"> Show Password</label>
+                
+                <label for="businessdate">Business Date:</label>
+                <input type="date" id="businessdate" name="businessdate" required>
+                
+                <fieldset>
+                    <legend>Gender:</legend>
+                    <label><input type="radio" name="gender" value="male" required> Male</label>
+                    <label><input type="radio" name="gender" value="female" required> Female</label>
+                    <label><input type="radio" name="gender" value="other" required> Multisex</label>
+                </fieldset>
+
+                <div id="error-message" style="color: red; margin-top: 10px;"></div> <!-- Error message placeholder -->
+                
+                <button type="submit"><font color="#ffffff">Sign Up</font></button>
+                <br><a href="signin.html"><text>Already have an account?</text> </a></br>           
+            </form>
+        </div>
+    </div>
+    <script src="signup.js"></script>
+</body>
+</html>

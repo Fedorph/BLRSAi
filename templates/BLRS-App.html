@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Location Recommendation System (BLRS)</title>
+    <!-- Link to External CSS -->
+    <link rel="stylesheet" href="{% static 'css/blrs.css' %}">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="text-center mb-4">
+            <!-- Logo Image -->
+            <img src="{% static 'logos/blrs.png' %}" alt="BLRS Logo" class="brand-logo" />
+            <!-- Signature Text -->
+            <h1 class="signature-text">BLRS</h1>
+            <p class="signature-description">The Business Location Recommendation System</p>
+        </div>
+        <form id="criteriaForm">
+            <!-- Form fields (same as previous example) -->
+            <div class="form-group">
+                <input type="text" class="form-control" id="name" placeholder=" " />
+                <label class="form-label" for="name">Business Name</label>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" id="business_type" placeholder=" " />
+                <label class="form-label" for="business_type">Business Type (e.g., retail, wholesale)</label>
+            </div>
+            <!-- Add other form fields here -->
+            <button type="button" class="btn btn-primary" onclick="getRecommendations()">Get Recommendations</button>
+        </form>
+        <div id="results" class="mt-4"></div>
+        <div id="map" class="mt-4" style="height: 400px;"></div>
+        <div id="chart" class="mt-4" style="height: 400px;"></div>
+    </div>
+
+    <!-- Link to External JavaScript -->
+    <script src="{% static 'js/blrs.js' %}"></script>
+</body>
+</html>

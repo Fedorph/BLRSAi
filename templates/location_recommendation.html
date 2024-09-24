@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Get location recommendations for your business based on essential details.">
+    <title>Business Location Recommendation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            text-align: center;
+            padding: 20px;
+            background-color: #000080;
+            color: #ffffff;
+        }
+        h1 {
+            margin: 0;
+        }
+        form {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        fieldset {
+            border: none;
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #000080;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0496f8;
+        }
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #000080;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>Business Location Recommendation System</h1>
+        </header>
+
+        <!-- Business Details Form -->
+        <form id="locationForm" method="POST" action="/process_location">
+            <!-- Business Details -->
+            <fieldset>
+                <legend>Business Details</legend>
+
+                <label for="companyName">Company Name:</label>
+                <input type="text" id="companyName" name="companyName" placeholder="e.g., Tech Innovators Ltd" required>
+
+                <label for="income">Annual Income (NGN):</label>
+                <input type="number" id="income" name="income" placeholder="e.g., 5000000" required>
+
+                <label for="businessType">Business Type:</label>
+                <select id="businessType" name="businessType" required>
+                    <option value="" disabled selected>Select Business Type</option>
+                    <option value="retail">Retail</option>
+                    <option value="technology">Technology</option>
+                    <option value="restaurant">Restaurant</option>
+                    <option value="service">Service</option>
+                </select>
+
+                <label for="businessSize">Business Size:</label>
+                <select id="businessSize" name="businessSize" required>
+                    <option value="" disabled selected>Select Business Size</option>
+                    <option value="small">Small</option>
+                    <option value="medium">Medium</option>
+                    <option value="large">Large</option>
+                </select>
+
+                <label for="budget">Budget (NGN):</label>
+                <input type="number" id="budget" name="budget" placeholder="e.g., 2000000" required>
+                
+                <label for="area">Local Government Area (Kaduna):</label>
+                <select id="area" name="area" required>
+                    <option value="" disabled selected>Select Local Government Area</option>
+                    <option value="rigasa">Rigasa (Igabi LGA)</option>
+                    <option value="mando">Mando (Igabi LGA)</option>
+                    <option value="birnin_gwari">Birnin Gwari</option>
+                    <option value="chikun">Chikun</option>
+                    <option value="giwa">Giwa</option>
+                    <option value="igabi">Igabi</option>
+                    <option value="kaduna_north">Kaduna North</option>
+                    <option value="kaduna_south">Kaduna South</option>
+                    <option value="zaria">Zaria</option>
+                </select>
+            </fieldset>
+
+            <!-- Additional Preferences -->
+            <fieldset>
+                <legend>Additional Preferences</legend>
+
+                <label for="preferences">Enter any preferences or additional details:</label>
+                <textarea id="preferences" name="preferences" placeholder="Type additional preferences or details..." rows="4"></textarea>
+            </fieldset>
+
+            <!-- Submit Button -->
+            <button type="submit">Get Recommendations</button>
+        </form>
+
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2024 Business Location Recommendation System. Philipp Amana Development - All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>

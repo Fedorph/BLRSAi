@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='ico/logo.ico') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sign up for our Business Location Recommendation System, leveraging location intelligence for optimal business locations.">
+    <meta name="keywords" content="business location, location intelligence, location analytics, google maps, recommendations, business location recommendation system, situated, position, area, platform">
+    <meta name="robots" content="index, follow">
+    <title>Learn More | BLRS - Business Location Recommendation System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/learn.css') }}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="{{ url_for('static', filename='logo/blrs.png') }}" alt="BLRS Logo" class="logo-img">
+                <h1 class="logo-name">BLRS</h1>
+            </div>
+            <nav class="menu">
+                <ul class="nav-links">
+                    <li><a href="{{ url_for('index') }}">Home</a></li>
+                    <li><a href="{{ url_for('about') }}">About</a></li>
+                    <li><a href="{{ url_for('results') }}">Results</a></li>
+                    <li><a href="{{ url_for('signup') }}">Sign Up</a></li>
+                    <li><a href="{{ url_for('signin') }}">Sign In</a></li>
+                </ul>
+                <div class="hamburger-menu">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <section class="hero-section">
+        <div class="container">
+            <h2>Find the Optimal Location for Your Business in Kaduna</h2>
+            <p>Discover the best business locations in Kaduna with real-time data from our system.</p>
+            <a href="{{ url_for('signup') }}" class="btn">Explore Locations</a>
+        </div>
+    </section>
+
+    <section class="updates-section" id="updates">
+        <div class="container">
+            <h2>Latest Updates</h2>
+            <div id="update-list">
+                <!-- Static updates content -->
+                <div class="update-item">
+                    <h3>Enhanced Recommendation Engine</h3>
+                    <p>Our new recommendation engine uses advanced machine learning algorithms to provide even more accurate and personalized business location suggestions.</p>
+                    <small>2024-08-01</small>
+                    <div class="details">
+                        This feature will analyze user preferences and historical data to deliver highly tailored recommendations, improving the relevance of business locations.
+                    </div>
+                </div>
+                <div class="update-item">
+                    <h3>Real-Time Traffic Insights</h3>
+                    <p>Get real-time traffic data integrated into your location recommendations, helping you choose locations based on current traffic conditions.</p>
+                    <small>2024-09-01</small>
+                    <div class="details">
+                        This functionality will help users make more informed decisions by incorporating live traffic updates into the recommendation process.
+                    </div>
+                </div>
+                <div class="update-item">
+                    <h3>Enhanced User Dashboard</h3>
+                    <p>A completely redesigned user dashboard that offers a more intuitive and streamlined interface for managing your location preferences and recommendations.</p>
+                    <small>2024-10-01</small>
+                    <div class="details">
+                        The new dashboard will feature customizable widgets, improved navigation, and more detailed analytics to enhance your user experience.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="logo">
+                <img src="{{ url_for('static', filename='logo/blrs.png') }}" height="100" width="100" alt="Situated Logo" class="logo-img">
+                <h1 class="logo-name">BLRS</h1>
+            </div>
+            <p>&copy; 2024 BLRS - Philipp Amana Production. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="{{ url_for('static', filename='js/learn.js') }}"></script>
+</body>
+</html>

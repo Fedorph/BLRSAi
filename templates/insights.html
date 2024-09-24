@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='ico/logo.ico') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insights: Business Location Analytics - Kaduna</title>
+    <!-- Include Chart.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/insights.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Business Location Recommendation System - Kaduna</h1>
+    </header>
+
+    <main>
+        <!-- User Input Section -->
+        <section id="user-input">
+            <h2>Adjust Preferences</h2>
+            <form id="preferences-form">
+                <label for="company-name">Company Name:</label>
+                <input type="text" id="company-name" name="companyName" value="Default Company">
+
+                <label for="business-type">Business Type:</label>
+                <select id="business-type" name="businessType">
+                    <option value="Retail">Retail</option>
+                    <option value="Restaurant">Restaurant</option>
+                    <option value="Technology">Technology</option>
+                    <option value="Entertainment">Entertainment</option>
+                    <option value="Fashion">Fashion</option>
+                    <option value="Marketing">Marketing</option>
+                    <option value="Advertising">Advertising</option>
+                    <option value="Security">Security</option>
+                    <option value="Hotel">Hotel</option>
+                    <option value="Store">Store</option>
+                    <option value="Wholesale">Wholesale</option>
+                    <option value="Real Estate">Real Estate</option>
+                    <option value="Financial">Financial</option>
+                    <option value="StartUp">StartUp</option>
+                    <!-- Add more options as needed -->
+                </select>
+
+                <label for="income">Estimated Annual Income:</label>
+                <input type="number" id="income" name="income" value="5000000">
+
+                <label for="budget">Location Budget:</label>
+                <input type="number" id="budget" name="budget" value="1000000">
+
+                <button type="submit">Update</button>
+            </form>
+        </section>
+
+        <!-- Analytics Section -->
+        <section id="analytics">
+            <h2>Location Suitability Analysis</h2>
+
+            <div class="chart-container">
+                <h3>Factor Distribution</h3>
+                <canvas id="locationPieChart"></canvas>
+            </div>
+
+            <div class="chart-container">
+                <h3>Trend Analysis</h3>
+                <canvas id="locationLineChart"></canvas>
+            </div>
+        </section>
+    </main>
+
+    <footer><p>&copy; 2024 BLRS - Philipp Amana Production. All rights reserved.</p></footer>
+
+    <script src="{{ url_for('static', filename='js/insights.js') }}"></script>
+</body>
+</html>

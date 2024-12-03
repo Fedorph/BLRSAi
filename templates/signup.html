@@ -1,26 +1,212 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="icon" type="image/x-icon" href="ico/logo.ico">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon/blrs.ico') }}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Sign up for our Business Location Recommendation System, leveraging location intelligence for optimal business locations.">
-    <meta name="keywords" content="business location, location intelligence, location analytics, google maps, recommendations, business location recommendation system, situated, position, area, platform">
+    <meta name="keywords" content="business location, location intelligence, location analytics, google maps, recommendations, business location recommendation system">
     <meta name="robots" content="index, follow">
-    <title>Sign Up: Pointar</title>
-    <link rel="stylesheet" href="signup.css">
+    <title>Sign Up: BLRS</title>
+    
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background-color: #06402B;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        header .logo {
+            max-width: 50px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        header h1 {
+            font-size: 24px;
+            margin-top: 10px;
+        }
+
+        /* Signup Form Wrapper */
+        .signup-wrapper {
+            display: grid;
+            place-items: center;
+            min-height: 80vh;
+            padding: 20px;
+        }
+
+        .signup-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .signup-container h2 {
+            font-size: 24px;
+            color: #000080;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            margin: 10px 0 5px;
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="date"],
+        input[type="email"],
+        input[type="tel"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        /* Show/Hide Password Button */
+        .password-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 14px;
+            color: #555;
+            cursor: pointer;
+        }
+
+        .password-toggle input {
+            margin-right: 10px;
+        }
+
+        button[type="submit"] {
+            background-color: #06402B;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            width: 100%;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #051e1a;
+        }
+
+        .signup-wrapper a {
+            display: inline-block;
+            margin-top: 10px;
+            font-size: 14px;
+            color: #06402B;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .signup-wrapper a:hover {
+            text-decoration: underline;
+        }
+
+        .g-signin2 {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #06402B;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        footer .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        footer img {
+            max-width: 40px;
+            margin-bottom: 10px;
+        }
+
+        footer p {
+            font-size: 14px;
+            color: #ddd;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 22px;
+            }
+
+            .signup-container {
+                padding: 20px;
+            }
+
+            h2 {
+                font-size: 20px;
+            }
+
+            label, input[type="text"], input[type="password"], input[type="date"], input[type="email"], input[type="tel"] {
+                font-size: 14px;
+            }
+
+            button[type="submit"] {
+                font-size: 14px;
+            }
+
+            footer .container {
+                align-items: center;
+            }
+
+            footer p {
+                font-size: 12px;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
         <div class="header-container">
-            <img src="logo/logo.png" alt="Pointar Logo" height="50" width="50" class="logo">
-            <h1>Pointar - Business Location Recommendation System</h1>
+            <img src="{{ url_for('static', filename='logos/blrs.png') }}" alt="BLRS Logo" class="logo">
+            <h1>BLRS - Business Location Recommendation System</h1>
         </div>
     </header>
+
     <div class="signup-wrapper">
         <div class="signup-container">
-            <h2><center><font color="#000080">SIGN UP</font></center></h2>
-            <form id="signupForm" action="signup.php" method="POST">
+            <h2><font color="#000080">SIGN UP</font></h2>
+            <form id="signupForm" action="{{ url_for('signup') }}" method="POST">
                 <label for="full-name">Full Name:</label>
                 <input type="text" id="full-name" name="full-name" placeholder="Enter your full name" required>
                 
@@ -30,34 +216,60 @@
                 <label for="companyname">Company Name:</label>
                 <input type="text" id="companyname" name="companyname" placeholder="Enter your company name" required>
                 
-                <label for="businesstype">Business Type:</label>
-                <input type="text" id="businesstype" name="businesstype" placeholder="Specify your business type" required>
-                
                 <label for="contact-info">Email/Phone Number:</label>
                 <input type="text" id="contact-info" name="contact-info" placeholder="Enter your email or phone number" required>
                 
                 <label for="password">Password:</label>
                 <input type="password" id="password" name="password" placeholder="Create a password" required>
-                
-                <label><input type="checkbox" id="showPassword"> Show Password</label>
+
+                <!-- Password Show/Hide Toggle -->
+                <div class="password-toggle">
+                    <label for="showPassword">Show Password</label>
+                    <input type="checkbox" id="showPassword">
+                </div>
                 
                 <label for="businessdate">Business Date:</label>
                 <input type="date" id="businessdate" name="businessdate" required>
-                
-                <fieldset>
-                    <legend>Gender:</legend>
-                    <label><input type="radio" name="gender" value="male" required> Male</label>
-                    <label><input type="radio" name="gender" value="female" required> Female</label>
-                    <label><input type="radio" name="gender" value="other" required> Multisex</label>
-                </fieldset>
 
-                <div id="error-message" style="color: red; margin-top: 10px;"></div> <!-- Error message placeholder -->
-                
-                <button type="submit"><font color="#ffffff">Sign Up</font></button>
-                <br><a href="signin.html"><text>Already have an account?</text> </a></br>           
+                <button type="submit">Sign Up</button>
+                <br><a href="{{ url_for('signin') }}">Already have an account? Login here</a>
             </form>
+
+            <!-- Google Sign-In Button -->
+            <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
         </div>
     </div>
-    <script src="signup.js"></script>
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="container">
+            <img src="{{ url_for('static', filename='logos/blrs.png') }}" height="40" width="40" alt="BLRS Logo" />
+            <p>&copy; 2024 BLRS. All rights reserved. | Amana Philip Production</p>
+        </div>
+    </footer>    
+
+    <script src="{{ url_for('static', filename='js/signup.js') }}"></script>
+    
+    <!-- Google Sign-In Script -->
+    <script>
+        // Toggle Password Visibility
+        document.getElementById('showPassword').addEventListener('change', function() {
+            var passwordField = document.getElementById('password');
+            if (this.checked) {
+                passwordField.type = 'text';
+            } else {
+                passwordField.type = 'password';
+            }
+        });
+
+        function onSignIn(googleUser) {
+            var profile = googleUser.getBasicProfile();
+            console.log("Signed in: " + profile.getName());
+            console.log("Email: " + profile.getEmail());
+            
+            // Use this info to send to your backend to create an account or log in
+            // You may need to send the token to your backend for verification
+        }
+    </script>
 </body>
 </html>

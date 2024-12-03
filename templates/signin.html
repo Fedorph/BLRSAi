@@ -1,45 +1,255 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="icon" type="image/x-icon" href="ico/logo.ico">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/logo.ico') }}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Sign in to our Business Location Recommendation System, leveraging location intelligence for optimal business locations.">
-    <meta name="keywords" content="business location, location intelligence, location analytics, google maps, recommendations, business location recommendation system, situated, position, area, platform">
-    <meta name="robots" content="index, follow">
-    <title>Sign In - Pointar</title>
-    <link rel="stylesheet" href="signin.css">
+    <title>Sign In - BLRS</title>
+
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background-color: #06402B;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            width: 100%;
+        }
+
+        header img {
+            max-width: 90px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        header h1 {
+            font-size: 22px;
+            margin-top: 10px;
+        }
+
+        /* Login Container */
+        .login-container {
+            display: grid;
+            place-items: center;
+            min-height: 80vh;
+            padding: 20px;
+        }
+
+        .login-container form {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .login-container h2 {
+            font-size: 24px;
+            color: #000080;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .password-container {
+            position: relative;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+
+        .login-button {
+            background-color: #06402B;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            width: 100%;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .login-button:hover {
+            background-color: #051e1a;
+        }
+
+        .extra-links {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .extra-links a {
+            color: #06402B;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .extra-links a:hover {
+            text-decoration: underline;
+        }
+
+        .extra-links .signup-button {
+            background-color: #06402B;
+            padding: 10px 15px;
+            border-radius: 5px;
+            color: #fff;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        #error-message {
+            color: red;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #06402B;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        footer p {
+            font-size: 14px;
+            margin: 5px;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 20px;
+            }
+
+            .login-container form {
+                padding: 20px;
+            }
+
+            .login-button {
+                font-size: 14px;
+            }
+
+            .input-group input {
+                font-size: 14px;
+            }
+
+            .extra-links a {
+                font-size: 12px;
+            }
+
+            #error-message {
+                font-size: 12px;
+            }
+
+            footer p {
+                font-size: 12px;
+            }
+
+            header img {
+                max-width: 80px;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="login-container">
         <header>
-            <center>
-                <img src="LOGO/pointar_brand.png" height="100" width="100" alt="Pointar LOGO">
-            </center>
-            <h1>SIGN IN</h1>
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="BLRS LOGO">
+            <h1>Sign In</h1>
         </header>
         <main>
-            <form id="loginForm">
+            <form id="loginForm" action="{{ url_for('login') }}" method="post">
                 <div class="input-group">
-                    <label for="email/phone">Email/Phone Number:</label>
+                    <label for="email_or_phone">Email/Phone Number:</label>
                     <input type="text" id="email_or_phone" name="email_or_phone" placeholder="Enter your email or phone number" required>
                 </div>
                 <div class="input-group password-container">
                     <label for="password">Password:</label>
                     <input type="password" id="password" name="password" placeholder="Enter your password" required>
                     <span class="toggle-password" onclick="togglePasswordVisibility()">
-                        <img id="togglePasswordIcon" src="icon/eye-crossed.png" alt="Show/Hide Password">
+                        <img id="togglePasswordIcon" src="{{ url_for('static', filename='images/eye-crossed.png') }}" alt="Show/Hide Password">
                     </span>
                 </div>
                 <button type="submit" class="login-button">Sign In</button>
                 <div class="extra-links">
                     <a href="reset.html" class="forgot-password">Forgot Password?</a>
-                    <a href="signup.html" class="signup-button" style="background-color: #000080; padding: 10px 15px; border-radius: 5px; color: #fff; text-decoration: none; display: inline-block; margin-top: 10px;">Sign Up</a>
+                    <a href="signup.html" class="signup-button">Sign Up</a>
                 </div>
-                <p id="error-message" style="color: red; margin-top: 15px;"></p>
+                <p id="error-message" style="color: red; margin-top: 15px;">
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                            {% for category, message in messages %}
+                                {{ message }}
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                </p>
             </form>
         </main>
     </div>
-    <script src="signin.js"></script>
+
+    <footer>
+        <p>&copy; 2024 BLRS. All rights reserved. | Amana Philip Production</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/signin.js') }}"></script>
+    
+    <!-- Password Toggle Script -->
+    <script>
+        function togglePasswordVisibility() {
+            var passwordField = document.getElementById('password');
+            var toggleIcon = document.getElementById('togglePasswordIcon');
+            
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                toggleIcon.src = "{{ url_for('static', filename='images/eye.png') }}"; // Eye icon for showing password
+            } else {
+                passwordField.type = 'password';
+                toggleIcon.src = "{{ url_for('static', filename='images/eye-crossed.png') }}"; // Eye-crossed icon for hiding password
+            }
+        }
+    </script>
 </body>
 </html>

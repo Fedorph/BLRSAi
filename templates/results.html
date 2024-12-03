@@ -3,103 +3,237 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BLRS - Recommended Locations</title>
-    <script src="{{ url_for('static', filename='services.js') }}"></script>
-    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='ico/logo.ico') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='results.css') }}">
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDiXCITzDUD_jcycku6v-AtOooHbPNnXFk"></script> <!-- Replace with your actual API key -->
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon/blrs.ico') }}">
+    <title>Recommendation Results: BLRS</title>
+    <meta name="description" content="Find the best locations for your business with BLRS recommendation results.">
+    <meta name="keywords" content="business location, location recommendation, location analysis, BLRS">
+    <meta name="author" content="Amana Philip">
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #f4f4f4;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #06402B;
+            color: #f4f4f4;
+            padding: 20px;
+            border-radius: 0 0 8px 8px;
+        }
+
+        header img {
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.8rem;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin: 15px auto;
+            padding: 10px 20px;
+            background-color: #f4f4f4;
+            color: #06402B;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: #08ac60;
+            color: #f4f4f4;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 25px;
+            background-color: #06402B;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2 {
+            color: #f4f4f4;
+            margin-bottom: 15px;
+        }
+
+        #businessDetails {
+            margin-bottom: 30px;
+        }
+
+        #businessDetails p {
+            margin: 5px 0;
+        }
+
+        #recommendationResults {
+            margin-top: 30px;
+        }
+
+        .location-result {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            background-color: #f9f9f9;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .location-result h3 {
+            margin-bottom: 10px;
+            color: #06402B;
+        }
+
+        .location-result p {
+            margin: 5px 0;
+        }
+
+        #map {
+            height: 400px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px;
+            background-color: #06402B;
+            color: #f4f4f4;
+            border-radius: 8px 8px 0 0;
+            font-size: 0.9rem;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #08ac60;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
 </head>
 <body>
     <!-- Header -->
     <header>
-        <div class="header-content">
-            <h1>BLRS - Recommended Locations</h1>
-            <nav>
-                <ul>
-                    <li><a href="{{ url_for('index') }}">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="pricing.html">Pricing</a></li>
-                    <li><a href="details.html">BLRS</a></li>
-                    <li><a href="signup.html">Sign Up</a></li>
-                    <li><a href="signin.html">Sign In</a></li>
-                    <li><a href="signout.html">Sign Out</a></li>
-                </ul>
-            </nav>
-        </div>
+        <img src="{{ url_for('static', filename='logos/blrs.png') }}" alt="BLRS Logo" height="50" width="50">
+        <h1>BLRS: Recommended Location for Restaurant Business Entrepreneur</h1>
+        <a href="{{ url_for('recommendation_route.recommendation_page') }}" class="back-button" aria-label="Go back to the recommendation page">← Back</a>
     </header>
 
+    <!-- Main Content -->
     <main>
-        <h1>Recommended Locations</h1>
-        <div id="mapContainer" style="height: 500px; width: 100%;"></div>
-        <div id="recommendationResults"></div>
+        <h1>Recommendation Results for {{ company_name }}</h1>
+
+        <!-- Display Business Details -->
+        <section id="businessDetails">
+            <h2>Your Business Details</h2>
+            <p><strong>Company Name:</strong> {{ company_name }}</p>
+            <p><strong>Restaurant Type:</strong> {{ restaurant_type }}</p>
+            <p><strong>Business Size:</strong> {{ business_size }}</p>
+            <p><strong>Location Budget:</strong> NGN {{ budget }}</p>
+            <p><strong>State:</strong> {{ state }}</p>
+        </section>
+
+        <!-- Recommendation Results -->
+        <section id="recommendationResults">
+            <h2>Recommended Location</h2>
+            <div id="loading" style="text-align:center;">
+                <p>Loading recommendations...</p>
+                <div class="spinner"></div>
+            </div>
+            <div id="results" style="display: none;">
+                {% if recommendations %}
+                    {% if recommendations|length == 1 %}
+                        <div class="location-result">
+                            <h3>{{ recommendations[0].name }}</h3>
+                            <p><strong>Latitude:</strong> {{ recommendations[0].lat }}</p>
+                            <p><strong>Longitude:</strong> {{ recommendations[0].lng }}</p>
+                            <p><strong>Target Audience:</strong> {{ recommendations[0].target_audience }}</p>
+                            <p><strong>Foot Traffic:</strong> {{ recommendations[0].foot_traffic }}</p>
+                            <p><strong>Affordability:</strong> {{ recommendations[0].affordability }}</p>
+                            <p><strong>Competitors:</strong> {{ recommendations[0].competitors }}</p>
+                            <p><strong>Recommendation Accuracy:</strong> {{ recommendations[0].accuracy }}%</p>
+                        </div>
+                    {% else %}
+                        <div class="location-results">
+                            {% for location in recommendations %}
+                                <div class="location-result">
+                                    <h3>{{ location.name }}</h3>
+                                    <p><strong>Latitude:</strong> {{ location.lat }}</p>
+                                    <p><strong>Longitude:</strong> {{ location.lng }}</p>
+                                    <p><strong>Target Audience:</strong> {{ location.target_audience }}</p>
+                                    <p><strong>Foot Traffic:</strong> {{ location.foot_traffic }}</p>
+                                    <p><strong>Affordability:</strong> {{ location.affordability }}</p>
+                                    <p><strong>Competitors:</strong> {{ location.competitors }}</p>
+                                    <p><strong>Recommendation Accuracy:</strong> {{ location.accuracy }}%</p>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% else %}
+                    <p>No recommendations found. Adjust your input criteria or try again later.</p>
+                {% endif %}
+            </div>
+        </section>
+
+        <!-- Map Section -->
+        <div id="map"></div>
     </main>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2024 BLRS - Philipp Amana Working. All rights reserved.</p>
+        <p>&copy; 2024 BLRS. All rights reserved. | Amana Philip Production</p>
     </footer>
 
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
     <script>
-        function displayRecommendations(recommendations) {
-            const resultsContainer = document.getElementById('recommendationResults');
-            resultsContainer.innerHTML = ''; // Clear previous results
+        document.addEventListener("DOMContentLoaded", () => {
+            const recommendations = {{ recommendations|tojson }};
+            setTimeout(() => {
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('results').style.display = 'block';
 
-            // Loop through recommendations and display them
-            recommendations.forEach((location, index) => {
-                const resultDiv = document.createElement('div');
-                resultDiv.classList.add('location-result');
-                resultDiv.innerHTML = `<h4>${location.name}</h4>
-                                        <p><strong>Price:</strong> ${location.price}</p>
-                                        <p><strong>Target Audience:</strong> ${location.target_audience}</p>
-                                        <p><strong>Foot Traffic:</strong> ${location.foot_traffic}</p>
-                                        <p><strong>Affordability:</strong> ${location.affordability}</p>
-                                        <p><strong>Resources:</strong> ${location.resources}</p>
-                                        <p><strong>Revenue Potential:</strong> ${location.revenue_potential}</p>
-                                        <p><strong>Competitors:</strong> ${location.competitors}</p>
-                                        <p><strong>Business Category:</strong> ${location.business_category}</p>
-                                        <p><strong>Income:</strong> ${location.income}</p>
-                                        <p><strong>Budget:</strong> ${location.budget}</p>
-                                        <p><strong>Nearness to Market:</strong> ${location.nearness_to_market}</p>
-                                        <p><strong>Sustainability:</strong> ${location.sustainability}</p>
-                                        <p><strong>Road Connection:</strong> ${location.road_connection}</p>
-                                        <p><strong>Business Success:</strong> ${location.business_success}</p>
-                                        <p><strong>Business Growth:</strong> ${location.business_growth}</p>
-                                        <p><strong>Government Policies:</strong> ${location.government_policies}</p>`;
+                if (recommendations && recommendations.length > 0) {
+                    const bounds = recommendations.length > 1 ? 
+                        L.latLngBounds(recommendations.map(rec => [rec.lat, rec.lng])) : 
+                        [[recommendations[0].lat, recommendations[0].lng]];
 
-                resultsContainer.appendChild(resultDiv);
+                    const map = L.map('map');
+                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        maxZoom: 19,
+                        attribution: '© OpenStreetMap contributors'
+                    }).addTo(map);
 
-                // Add marker to map for this location
-                if (index === 0) {
-                    // Set map to center on the first location
-                    const mapOptions = {
-                        center: { lat: location.lat, lng: location.lng },
-                        zoom: 12,
-                    };
-                    const map = new google.maps.Map(document.getElementById('mapContainer'), mapOptions);
+                    map.fitBounds(bounds);
 
-                    // Add marker for each recommendation
-                    new google.maps.Marker({
-                        position: { lat: location.lat, lng: location.lng },
-                        map: map,
-                        title: location.name
+                    recommendations.forEach(rec => {
+                        L.marker([rec.lat, rec.lng])
+                            .addTo(map)
+                            .bindPopup(`<b>${rec.name}</b><br>Foot Traffic: ${rec.foot_traffic}`);
                     });
+                } else {
+                    document.getElementById('map').innerHTML = '<p>No map data available.</p>';
                 }
-            });
-        }
-
-        function fetchRecommendations() {
-            // Fetch recommendations from server
-            fetch('/get_recommendations')  // Update route if necessary
-                .then(response => response.json())
-                .then(data => {
-                    displayRecommendations(data.recommendations);  // Send recommendations to display function
-                })
-                .catch(error => {
-                    console.error('Error fetching recommendations:', error);
-                });
-        }
-
-        window.onload = fetchRecommendations;  // Fetch recommendations when page loads
+            }, 2000); // Simulate fetching data
+        });
     </script>
 </body>
 </html>

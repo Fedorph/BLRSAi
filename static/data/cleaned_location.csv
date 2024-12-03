@@ -1,0 +1,37 @@
+name,type,business_size,budget,state,lng,lat,target_audience,foot_traffic,affordability,competitors
+Station Market by Kaduna Junction,traditional,small,400000,Kaduna,115.0610053,-8.2602862,low,high,high,moderate
+Force Road by Independence Way,intercontinental,medium,2500000,Kaduna,31.3663626,-8.8500884,high,high,moderate,high
+Ahmadu Bello Way by Jos Road,traditional,small,15000000,Kaduna,115.0610053,-8.2602862,high,moderate,high,moderate
+Ahmadu Bello Way by Alkali Road,intercontinental,medium,6000000,Kaduna,31.3663626,-8.8500884,high,moderate,high,high
+Kano Road by Ahmadu Bello Way,traditional,small,5500000,Kaduna,115.0610053,-8.2602862,medium,moderate,moderate,medium
+Ribadu Road by Tafawa Balewa Way,intercontinental,medium,7500000,Kaduna,31.3663626,-8.8500884,medium,moderate,moderate,medium
+Off Degel Road by Ungwan Rimi,traditional,small,12500000,Kaduna,115.0610053,-8.2602862,medium,low,moderate,low
+Abdulkadir Road by Ungwan Rimi,intercontinental,medium,5000000,Kaduna,31.3663626,-8.8500884,medium,low,moderate,medium
+Ahmadu Bello Way by Isah Kaita,traditional,small,7000000,Kaduna,115.0610053,-8.2602862,high,high,low,high
+Sultan Road by Nasarawa,intercontinental,medium,15000000,Kaduna,31.3663626,-8.8500884,high,high,low,moderate
+Constitution Road by Independence Way,traditional,small,1250000,Kaduna,115.0610053,-8.2602862,high,moderate,low,moderate
+Ahmadu Bello Way by Jos Road,intercontinental,medium,700000,Kaduna,31.3663626,-8.8500884,high,moderate,low,moderate
+Gombe Road by Ahmadu Bello Way,traditional,small,2000000,Kaduna,115.0610053,-8.2602862,medium,moderate,moderate,low
+Ungwan Rimi by Ramat Road,intercontinental,medium,2000000,Kaduna,31.3663626,-8.8500884,medium,moderate,moderate,medium
+Ahmadu Bello Way by Kakuri,traditional,small,2000000,Kaduna,115.0610053,-8.2602862,medium,low,moderate,medium
+Murtala Muhammed Square by Ahmadu Bello Way,intercontinental,medium,5000000,Kaduna,31.3663626,-8.8500884,medium,low,moderate,low
+Ahmadu Bello Way by Leventis,traditional,small,4500000,Kaduna,115.0610053,-8.2602862,low,low,moderate,low
+Aliyu Makama Road by Kaduna Junction,intercontinental,medium,6000000,Kaduna,31.3663626,-8.8500884,low,low,moderate,moderate
+Central Market by Ahmadu Bello Way,traditional,small,650000,Kaduna,115.0610053,-8.2602862,low,low,moderate,high
+Ahmadu Bello Way by Ungwar Sarki,intercontinental,medium,250000,Kaduna,31.3663626,-8.8500884,low,moderate,moderate,medium
+Murtala Square Stadium by Race Course Road,traditional,small,7000000,Kaduna,115.0610053,-8.2602862,high,high,moderate,high
+City Centre by Sokoto Road,intercontinental,medium,4000000,Kaduna,31.3663626,-8.8500884,high,high,moderate,high
+Ahmadu Bello Way by Taiwo Road,traditional,small,1750000,Kaduna,115.0610053,-8.2602862,medium,moderate,moderate,medium
+Rigachikun Road by Independence Way,intercontinental,medium,3500000,Kaduna,31.3663626,-8.8500884,medium,moderate,moderate,medium
+Kanta Road by Ahmadu Bello Way,traditional,small,1500000,Kaduna,115.0610053,-8.2602862,low,low,moderate,low
+Bida Road by Sabon Gari,intercontinental,medium,1250000,Kaduna,31.3663626,-8.8500884,low,moderate,low,medium
+Leventis by Ahmadu Bello Way,traditional,small,1300000,Kaduna,115.0610053,-8.2602862,low,moderate,low,high
+Ahmadu Bello Way by Kano Road,intercontinental,medium,1800000,Kaduna,31.3663626,-8.8500884,low,low,low,high
+Independence Way by Bida Road,traditional,small,1600000,Kaduna,115.0610053,-8.2602862,high,high,high,high
+Lagos Street by Ahmadu Bello Way,intercontinental,medium,3700000,Kaduna,31.3663626,-8.8500884,high,moderate,high,high
+Surami Road by Ungwan Rimi GRA,traditional,small,1700000,Kaduna,115.0610053,-8.2602862,high,moderate,high,high
+Waff Road off Independence Way,intercontinental,medium,1500000,Kaduna,31.3663626,-8.8500884,high,moderate,high,moderate
+Ahmadu Bello Way by Lagos Street,traditional,small,4500000,Kaduna,115.0610053,-8.2602862,medium,low,moderate,medium
+Mangal Plaza by Ahmadu Bello Way,intercontinental,medium,6000000,Kaduna,31.3663626,-8.8500884,medium,low,moderate,medium
+New Millennium City by Ungwan Rimi,traditional,small,10000000,Kaduna,115.0610053,-8.2602862,medium,low,moderate,high
+Ibadan Street by Ahmadu Bello Way,intercontinental,medium,1400000,Kaduna,31.3663626,-8.8500884,medium,low,moderate,medium

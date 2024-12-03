@@ -1,38 +1,50 @@
-# app.py
-from flask import Flask, render_template, request, redirect, url_for, jsonify
-from model import recommend_locations  # Import the recommendation function
+from flask import Flask, render_template
+from route import recommendation_route, results_route
+import os
+import logging
 
+# Initialize Flask app
 app = Flask(__name__)
 
-@app.route('/')
-def index():
-    return render_template('location_form.html')
+# Configure app
+app.config.from_mapping(
+    SECRET_KEY=os.getenv('FLASK_SECRET_KEY', '356dd4ea1fa9d38d0dd96d060aa54cd4'),
+    DEBUG=os.getenv('FLASK_DEBUG', 'True').lower() in ('true', '1'),
+)
 
-@app.route('/process_location', methods=['POST'])
-def process_location():
-    # Extract form data
-    company_name = request.form.get('companyName')
-    income = int(request.form.get('income'))
-    business_type = request.form.get('businessType')
-    business_size = request.form.get('businessSize')
-    budget = int(request.form.get('budget'))
-    area = request.form.get('area')
-    preferences = request.form.get('preferences')
-    
-    # Use the AI model to get location recommendations
-    recommended_locations = recommend_locations(
-        business_type=business_type,
-        business_size=business_size,
-        income=income,
-        area=area,
-        preferences=preferences
-    )
+# Set up logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
-    # For simplicity, print recommendations to console (you can log this)
-    print(f"Recommended Locations for {company_name}: {recommended_locations}")
+# Routes
+@app.route('/', methods=['GET'])
+@app.route('/recommendation', methods=['GET'])
+def recommendation():
+    return render_template('recommendation.html')
 
-    # Render recommendations on the form page itself or a new page
-    return render_template('location_form.html', recommendations=recommended_locations)
+@app.route('/results', methods=['GET'])
+def results():
+    return render_template('results.html')
 
+@app.route('/health', methods=['GET'])
+def health_check():
+    return {"status": "OK"}, 200
+
+# Error handlers
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
+
+@app.errorhandler(500)
+def internal_error(e):
+    logger.error(f"Server error: {e}")
+    return render_template('500.html'), 500
+
+# Initialize routes from route.py
+app.register_blueprint(recommendation_route)
+app.register_blueprint(results_route)
+
+# Run app
 if __name__ == '__main__':
-    app.run(debug=True)
+    logger.info("Starting Flask application...")
+    app.run(debug=app.config['DEBUG'])

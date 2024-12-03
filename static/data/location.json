@@ -1,0 +1,57 @@
+# Real location data for different restaurant types with coordinates
+    location_data = {
+        "fine_dining": [
+            {"name": "Station Market by Kaduna Junction", "lat": 10.123456, "lng": 7.123456, "area":"Kaduna"},
+            {"name": "Force Road by Independence Way", "lat": 10.234567, "lng": 7.234567, "area":"Kaduna"},
+            {"name": "Ahmadu Bello Way by Jos Road", "lat": 10.345678, "lng": 7.345678, "area":"Kaduna"},
+            {"name": "Ahmadu Bello Way by Alkali Road", "lat": 10.456789, "lng": 7.456789, "area":"Kaduna"}
+        ],
+        "casual_dining": [
+            {"name": "Lafia Road by Nasarawa", "lat": 10.567890, "lng": 7.567890, "area":"Kaduna"},
+            {"name": "Ribadu Road by Tafawa Balewa Way", "lat": 10.678901, "lng": 7.678901, "area":"Kaduna"},
+            {"name": "Off Degel Road by Ungwan Rimi", "lat": 10.789012, "lng": 7.789012, "area":"Kaduna"},
+            {"name": "Abdulkadir Road by Ungwan Rimi", "lat": 10.890123, "lng": 7.890123, "area":"Kaduna"}
+        ],
+        "fast_food": [
+            {"name": "Ahmadu Bello Way by Isah Kaita", "lat": 10.901234, "lng": 7.901234, "area":"Kaduna"},
+            {"name": "Sultan Road by Nasarawa", "lat": 10.012345, "lng": 7.012345, "area":"Kaduna"},
+            {"name": "Constitution Road by Independence Way", "lat": 10.123456, "lng": 7.123456, "area":"Kaduna"},
+            {"name": "Ahmadu Bello Way by Jos Road", "lat": 10.234567, "lng": 7.234567, "area":"Kaduna"}
+        ],
+        "cafe": [
+            {"name": "Gombe Road by Ahmadu Bello Way", "lat": 10.345678, "lng": 7.345678, "area":"Kaduna"},
+            {"name": "Ungwan Rimi by Ramat Road", "lat": 10.456789, "lng": 7.456789, "area":"Kaduna"},
+            {"name": "Ahmadu Bello Way by Kakuri", "lat": 10.567890, "lng": 7.567890, "area":"Kaduna"},
+            {"name": "Ahmadu Bello Way by City Centre", "lat": 10.678901, "lng": 7.678901, "area":"Kaduna"}
+        ],
+        "buffet": [
+            {"name": "Ahmadu Bello Way by Leventis", "lat": 10.789012, "lng": 7.789012, "area":"Kaduna"},
+            {"name": "Aliyu Makama Road by Kaduna Junction", "lat": 10.890123, "lng": 7.890123, "area":"Kaduna"},
+            {"name": "Central Market by Ahmadu Bello Way", "lat": 10.901234, "lng": 7.901234, "area":"Kaduna"},
+            {"name": "Ahmadu Bello Way by Ungwar Sarki", "lat": 10.012345, "lng": 7.012345, "area":"Kaduna"}
+        ],
+        "family_style": [
+            {"name": "Race Course Road by Murtala Square Stadium", "lat": 10.123456, "lng": 7.123456, "area":"Kaduna"},
+            {"name": "Sokoto Road by City Centre", "lat": 10.234567, "lng": 7.234567, "area":"Kaduna"},
+            {"name": "Ahmadu Bello Way by Taiwo Road", "lat": 10.345678, "lng": 7.345678, "area":"Kaduna"},
+            {"name": "Rigachikun Road by Independence Way", "lat": 10.456789, "lng": 7.456789, "area":"Kaduna"}
+        ],
+        "ethnic": [
+            {"name": "Kanta Road by Ahmadu Bello Way", "lat": 10.567890, "lng": 7.567890, "area":"Kaduna"},
+            {"name": "Bida Road by Sabon Gari", "lat": 10.678901, "lng": 7.678901, "area":"Kaduna"},
+            {"name": "Leventis by Ahmadu Bello Way", "lat": 10.789012, "lng": 7.789012, "area":"Kaduna"},
+            {"name": "Ahmadu Bello Way by Kano Road", "lat": 10.890123, "lng": 7.890123, "area":"Kaduna"}
+        ],
+        "steakhouse": [
+            {"name": "Independence Way by Bida Road", "lat": 10.901234, "lng": 7.901234, "area":"Kaduna"},
+            {"name": "Kano Road by Ahmadu Bello Way", "lat": 10.012345, "lng": 7.012345, "area":"Kaduna"},
+            {"name": "Sokoto Road by City Centre", "lat": 10.123456, "lng": 7.123456, "area":"Kaduna"},
+            {"name": "Waff Road, off Independence Way", "lat": 10.234567, "lng": 7.234567, "area":"Kaduna"}
+        ],
+        "pizzerias": [
+            {"name": "Ahmadu Bello Way by Lagos Street", "lat": 10.345678, "lng": 7.345678, "area":"Kaduna"},
+            {"name": "Mangal Plaza by Ahmadu Bello Way", "lat": 10.456789, "lng": 7.456789, "area":"Kaduna"},
+            {"name": "Kano Road by Ahmadu Bello Way", "lat": 10.567890, "lng": 7.567890, "area":"Kaduna"},
+            {"name": "Sokoto Road by City Centre", "lat": 10.678901, "lng": 7.678901, "area":"Kaduna"}
+        ]
+    }

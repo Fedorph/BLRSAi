@@ -1,68 +1,109 @@
 import pandas as pd
-import numpy as np
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.preprocessing import StandardScaler
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score, classification_report
-import pickle
+import joblib
+import os
+import logging
 
-# 1. Load your dataset
-try:
-    # Update the path to your CSV file accordingly
-    data = pd.read_csv('static/data/locations.csv')  
-except FileNotFoundError as e:
-    print("Error: The file was not found. Please check the path.")
-    raise e
+# Set up logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
-# Assuming your dataset has these columns
-features = ['price', 'target_audience', 'foot_traffic', 'affordability', 'resources', 
-            'revenue_potential', 'competitors', 'business_category', 'income', 
-            'budget', 'nearness_to_market', 'sustainability', 'road_connection', 
-            'business_growth', 'government_policies']
-target = 'business_success'  # The column you want to predict
+# File paths
+MODEL_PATH = 'static/models/location_recommender_model.pkl'
+ENCODER_PATHS = {
+    'target_audience': 'static/models/target_audience_encoder.pkl',
+    'foot_traffic': 'static/models/foot_traffic_encoder.pkl',
+    'affordability': 'static/models/affordability_encoder.pkl',
+    'competitors': 'static/models/competitors_encoder.pkl',
+}
+LOCATIONS_CSV_PATH = 'static/data/cleaned_location.csv'
 
-# Check if all features are in the dataset
-missing_features = [feature for feature in features if feature not in data.columns]
-if missing_features:
-    raise ValueError(f"Missing features in dataset: {missing_features}")
+# Verify files exist
+for name, path in {**ENCODER_PATHS, 'model': MODEL_PATH, 'locations': LOCATIONS_CSV_PATH}.items():
+    if not os.path.exists(path):
+        raise FileNotFoundError(f"{name.capitalize()} file not found at {path}")
 
-# 2. Prepare the data
-X = data[features]
-y = data[target]
+# Load models and encoders
+logger.info("Loading model and encoders...")
+model = joblib.load(MODEL_PATH)
+target_audience_encoder = joblib.load(ENCODER_PATHS['target_audience'])
+foot_traffic_encoder = joblib.load(ENCODER_PATHS['foot_traffic'])
+affordability_encoder = joblib.load(ENCODER_PATHS['affordability'])
+competitors_encoder = joblib.load(ENCODER_PATHS['competitors'])
 
-# Split the dataset into training and test sets
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+# Load locations data once at the beginning to avoid loading it each time
+logger.info("Loading locations data...")
+locations_df = pd.read_csv(LOCATIONS_CSV_PATH)
 
-# 3. Scale the features
-scaler = StandardScaler()
-X_train_scaled = scaler.fit_transform(X_train)
-X_test_scaled = scaler.transform(X_test)
+def get_top_recommendation(restaurant_type, business_size, budget, state):
+    """
+    Predicts and returns the top location recommendation based on input parameters.
+    The locations should have a budget equal to or above the user's input.
+    """
+    try:
+        # Normalize the 'state' column and filter based on state and budget (>= user input)
+        logger.info(f"Filtering locations for state: {state} and budget >= {budget}")
+        locations_df['state'] = locations_df['state'].str.strip().str.lower()
+        state = state.strip().lower()
 
-# 4. Train the model
-model = RandomForestClassifier(n_estimators=100, random_state=42)
-model.fit(X_train_scaled, y_train)
+        # Filter locations based on state and budget constraint (greater than or equal to input)
+        filtered_df = locations_df.query("state == @state and budget >= @budget")
 
-# 5. Evaluate the model
-y_pred = model.predict(X_test_scaled)
-accuracy = accuracy_score(y_test, y_pred)
-print(f"Model Accuracy: {accuracy * 100:.2f}%")
+        if filtered_df.empty:
+            logger.info("No locations match the given criteria.")
+            return [{"error": "No locations match the given criteria."}]
 
-# Print classification report
-print("Classification Report:")
-print(classification_report(y_test, y_pred))
+        # Encode restaurant type and business size
+        restaurant_type_encoded = 1 if restaurant_type.lower() == 'traditional' else 2
+        business_size_encoded = 1 if business_size.lower() == 'small' else 2
 
-# 6. Save the model to a file
-try:
-    with open('model.pkl', 'wb') as model_file:
-        pickle.dump(model, model_file)
-    print("Model has been saved successfully to 'model.pkl'!")
-except Exception as e:
-    print("Error saving the model:", e)
+        # Prepare input data and predict scores
+        logger.info("Predicting location scores...")
+        filtered_df['restaurant_type_encoded'] = restaurant_type_encoded
+        filtered_df['business_size_encoded'] = business_size_encoded
 
-# 7. Save the scaler to a file
-try:
-    with open('scaler.pkl', 'wb') as scaler_file:
-        pickle.dump(scaler, scaler_file)
-    print("Scaler has been saved successfully to 'scaler.pkl'!")
-except Exception as e:
-    print("Error saving the scaler:", e)
+        # Define the features for the prediction
+        features = ['restaurant_type_encoded', 'business_size_encoded', 'budget']
+        filtered_df['score'] = model.predict(filtered_df[features])
+
+        # Get the top recommendation based on the score
+        top_location = filtered_df.sort_values(by='score', ascending=False).iloc[0]
+        logger.info(f"Top location: {top_location['name']} with score: {top_location['score']}")
+
+        # Return the top location details
+        return [
+            {
+                "name": top_location['name'],
+                "lat": top_location['lat'],
+                "lng": top_location['lng'],
+                "target_audience": target_audience_encoder.inverse_transform([int(top_location['target_audience'])])[0],
+                "foot_traffic": foot_traffic_encoder.inverse_transform([int(top_location['foot_traffic'])])[0],
+                "affordability": affordability_encoder.inverse_transform([int(top_location['affordability'])])[0],
+                "competitors": competitors_encoder.inverse_transform([int(top_location['competitors'])])[0],
+                "accuracy": round(top_location['score'] * 100, 2),
+            }
+        ]
+
+    except Exception as e:
+        logger.error(f"Error during recommendation: {e}")
+        raise RuntimeError(f"Error processing recommendation: {e}")
+
+if __name__ == "__main__":
+    try:
+        # Get user input for parameters
+        restaurant_type = input("Enter the type of restaurant (e.g., 'Traditional'): ").strip()
+        business_size = input("Enter the business size (e.g., 'Small'): ").strip()
+        budget = float(input("Enter the budget: ").strip())
+        state = input("Enter the state (e.g., 'Kaduna'): ").strip()
+
+        # Get recommendation based on user input
+        recommendation = get_top_recommendation(
+            restaurant_type=restaurant_type,
+            business_size=business_size,
+            budget=budget,
+            state=state
+        )
+        print("Recommendation:", recommendation)
+    except ValueError as ve:
+        print(f"Invalid input: {ve}")
+    except RuntimeError as err:
+        print(f"Error during processing: {err}")

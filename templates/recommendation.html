@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon/blrs.ico') }}">
+    <title>Location Recommendation: BLRS</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, , Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #f4f4f4;
+        }
+
+        header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #06402B;
+    color: #f4f4f4;
+    padding: 20px;
+    border-radius: 0 0 8px 8px;
+}
+
+header img {
+    vertical-align: middle;
+    margin-right: 10px; /* Adds spacing between logo and text */
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.8rem;
+}
+
+        .form-container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 25px;
+            background-color: #06402B;
+            color:#f4f4f9;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-container h2 {
+            color: #f4f4f9;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            color: #f4f4f9;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .form-group input[type="submit"] {
+            background-color: #f4f4f4;
+            color: #06402B;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .form-group input[type="submit"]:hover {
+            background-color: #08ac60;
+            color: #f4f4f4;
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px;
+            background-color: #06402B;
+            color: white;
+            border-radius: 8px 8px 0 0;
+            font-size: 0.9rem;
+        }
+
+        .error-message {
+            color: red;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <img src="{{ url_for('static', filename='logos/blrs.png') }}" alt="BLRS Logo" height="50" width="50">
+        <h1>BLRS: Location Recommendation</h1>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="form-container">
+            <h2>Enter Your Business Details</h2>
+
+            <!-- Display Error Message -->
+            {% if error %}
+                <div class="error-message">{{ error }}</div>
+            {% endif %}
+
+            <form method="POST" action="{{ url_for('results_route.results_page') }}">
+                <div class="form-group">
+                    <label for="company_name">Company Name:</label>
+                    <input type="text" id="company_name" name="company_name" value="{{ form_data.company_name if form_data else '' }}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="restaurant_type">Restaurant Type:</label>
+                    <select id="restaurant_type" name="restaurant_type" required>
+                        <option value="Traditional" {% if form_data and form_data.restaurant_type == 'Traditional' %}selected{% endif %}>Traditional</option>
+                        <option value="Intercontinental" {% if form_data and form_data.restaurant_type == 'Intercontinental' %}selected{% endif %}>Intercontinental</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="business_size">Business Size:</label>
+                    <select id="business_size" name="business_size" required>
+                        <option value="Small" {% if form_data and form_data.business_size == 'Small' %}selected{% endif %}>Small</option>
+                        <option value="Medium" {% if form_data and form_data.business_size == 'Medium' %}selected{% endif %}>Medium</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="budget">Location Budget (NGN):</label>
+                    <input type="number" id="budget" name="budget" value="{{ form_data.budget if form_data else '' }}" min="250000" max="20000000" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="state">State:</label>
+                    <select id="state" name="state" required>
+                        <option value="Kaduna" {% if form_data and form_data.state == 'Kaduna' %}selected{% endif %}>Kaduna</option>
+                        <!-- Add more states if needed -->
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Get Recommendations">
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 BLRS. All rights reserved. | Amana Philip Production</p>
+    </footer>
+</body>
+</html>

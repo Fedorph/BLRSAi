@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BLRS User Interaction History</title>
+
+    <!-- Favicon Link -->
+    <link rel="icon" href="{{ url_for('static', filename='favicon/blrs.ico') }}" type="image/x-icon">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.2/css/bootstrap.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            padding: 20px;
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f8fb;
+        }
+        h1, h4, h5 {
+            font-weight: 600;
+            color: #303030;
+        }
+        .history-item {
+            background-color: #fff;
+            border: 1px solid #e0e0e0;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        .btn-primary {
+            background-color: #1E4D92;
+            border-color: #1E4D92;
+        }
+        .btn-primary:hover {
+            background-color: #163C70;
+            border-color: #163C70;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #7a7a7a;
+        }
+        .timestamp {
+            font-size: 0.85em;
+            color: gray;
+        }
+        .container {
+            max-width: 1200px;
+        }
+        .header {
+            background-color: #1E4D92;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            border-radius: 8px 8px 0 0;
+        }
+        .logo img {
+            max-width: 150px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header with Logo -->
+        <div class="header">
+            <div class="logo">
+                <img src="{{ url_for('static', filename='images/blrs-logo.png') }}" alt="BLRS Logo">
+            </div>
+            <h1>BLRS - User Interaction History</h1>
+            <p>Explore the interactions you’ve had with our recommendation system.</p>
+        </div>
+
+        <!-- Content -->
+        {% if user_history %}
+            {% for session in user_history %}
+                <div class="history-item">
+                    <h4>Interaction with {{ session['company_name'] }}</h4>
+                    <p><strong>Location Recommended:</strong> {{ session['location_recommended'] }}</p>
+                    <p><strong>Accuracy:</strong> {{ session['recommendation_accuracy'] }}%</p>
+                    <p><strong>Timestamp:</strong> <span class="timestamp">{{ session['timestamp'] }}</span></p>
+
+                    <h5>User Input:</h5>
+                    <ul>
+                        <li><strong>Restaurant Type:</strong> {{ session['restaurant_type'] }}</li>
+                        <li><strong>Business Size:</strong> {{ session['business_size'] }}</li>
+                        <li><strong>Budget:</strong> {{ session['budget'] }}</li>
+                        <li><strong>Target Audience:</strong> {{ session['target_audience'] }}</li>
+                        <li><strong>Foot Traffic:</strong> {{ session['foot_traffic'] }}</li>
+                        <li><strong>Affordability:</strong> {{ session['affordability'] }}</li>
+                        <li><strong>Competitors:</strong> {{ session['competitors'] }}</li>
+                    </ul>
+
+                    <a href="{{ url_for('download_session_file', file_name=session['file_name']) }}" class="btn btn-primary">Download Session Details</a>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No history found.</p>
+        {% endif %}
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>&copy; 2024 BLRS. All rights reserved.</p>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

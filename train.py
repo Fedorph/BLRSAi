@@ -1,122 +1,124 @@
 import pandas as pd
-import numpy as np
-from sklearn.model_selection import train_test_split, cross_val_score
+from sklearn.model_selection import train_test_split, RandomizedSearchCV
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import accuracy_score, classification_report, f1_score, confusion_matrix, average_precision_score
-from sklearn.preprocessing import LabelEncoder, StandardScaler, label_binarize
-from imblearn.over_sampling import SMOTE
-from imblearn.pipeline import Pipeline
+from xgboost import XGBClassifier
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+from imblearn.over_sampling import SMOTEENN
+import matplotlib.pyplot as plt
 import joblib
 import os
-import logging
-from collections import Counter
 
-# Set up logging
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
+# File paths
+DATA_PATH = "static/data/locations.csv"
+MODEL_PATH = "static/models/location_recommender.pkl"
 
-# Ensure the 'models' directory exists
-os.makedirs(os.path.join('static', 'models'), exist_ok=True)
+def train_model():
+    """
+    Trains a model to recommend locations based on budget and other features.
+    Saves the trained model to the specified path.
+    """
+    print("Loading dataset...")
+    data = pd.read_csv(DATA_PATH)
 
-# Load the dataset
-data_path = os.path.join('static', 'data', 'locations.csv')  # Adjust the path if needed
-logger.info("Loading dataset...")
-df = pd.read_csv(data_path)
+    # Preprocess the data
+    print("Preprocessing dataset...")
 
-# Handle missing values
-logger.info("Handling missing values...")
-df.ffill(inplace=True)
+    # Drop unnecessary columns if they exist
+    if 'name' in data.columns:
+        data = data.drop(columns=['name'])
 
-# Encode categorical columns
-logger.info("Encoding categorical columns...")
-categorical_columns = ['type', 'business_size', 'target_audience', 'affordability', 'competitors']
-encoders = {}
-for col in categorical_columns:
-    encoders[col] = LabelEncoder()
-    df[col] = encoders[col].fit_transform(df[col])
+    # Check data types
+    print("Data types of columns:")
+    print(data.dtypes)
 
-# Encode target variable 'foot_traffic'
-logger.info("Encoding target variable 'foot_traffic'...")
-foot_traffic_encoder = LabelEncoder()
-df['foot_traffic'] = foot_traffic_encoder.fit_transform(df['foot_traffic'])
+    # Convert categorical columns to numeric using one-hot encoding
+    X = pd.get_dummies(data.drop(columns=['affordability']), drop_first=True)
+    y = data['affordability']
 
-# Scale numerical columns
-logger.info("Scaling numerical columns...")
-scaler = StandardScaler()
-df['budget_scaled'] = scaler.fit_transform(df[['budget']])
+    # Print class distribution before resampling
+    print("Class distribution before resampling:")
+    print(y.value_counts())
 
-# Define features and target
-logger.info("Selecting features and target variable...")
-X = df[['type', 'business_size', 'target_audience', 'affordability', 'competitors', 'budget_scaled']]
-y = df['foot_traffic']
+    # Handle class imbalance using SMOTE-ENN
+    smote_enn = SMOTEENN(random_state=42)
+    X_resampled, y_resampled = smote_enn.fit_resample(X, y)
 
-# Split the data into training and testing sets
-logger.info("Splitting data into training and testing sets...")
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+    # Print class distribution after resampling
+    print("Class distribution after resampling:")
+    print(y_resampled.value_counts())
 
-# Adjust SMOTE k_neighbors based on class distribution
-class_counts = Counter(y_train)
-min_class_samples = min(class_counts.values())
-k_neighbors = min(5, min_class_samples - 1) if min_class_samples > 1 else 1
-logger.info(f"Setting SMOTE k_neighbors to {k_neighbors} based on smallest class sample size.")
+    # Split the data into training and testing sets
+    print("Splitting dataset into training and testing sets...")
+    X_train, X_test, y_train, y_test = train_test_split(X_resampled, y_resampled, test_size=0.2, random_state=42)
 
-# Set class weights if 'high foot traffic' is the most important class
-class_weights = {i: 1 for i in range(len(np.unique(y)))}  # Equal weights initially
-# Update class weights for 'high foot traffic' (assuming it's the class with the highest label)
-# Replace 'high_class_label' with the actual label for high foot traffic
-high_class_label = 2  # Example class label for high foot traffic
-class_weights[high_class_label] = 5  # Give more weight to high foot traffic
+    # Initialize and train XGBoost model with hyperparameter tuning
+    print("Tuning hyperparameters...")
+    param_dist = {
+        'n_estimators': [100, 200, 300, 500],
+        'learning_rate': [0.01, 0.1, 0.2],
+        'max_depth': [3, 6, 10, 15],
+        'min_child_weight': [1, 5, 10],
+        'subsample': [0.8, 0.9, 1.0],
+        'colsample_bytree': [0.5, 0.7, 1.0],
+        'gamma': [0, 1, 5],
+        'scale_pos_weight': [1, 2, 3]
+    }
 
-pipeline = Pipeline(steps=[
-    ('smote', SMOTE(random_state=42, k_neighbors=k_neighbors)),
-    ('model', RandomForestClassifier(random_state=42, class_weight=class_weights))
-])
+    xgb_model = XGBClassifier(
+        objective='multi:softmax',  # Multi-class classification
+        num_class=3,  # Adjust based on the number of classes in your problem
+        use_label_encoder=False,  # To avoid warnings
+        eval_metric='mlogloss',  # Log loss for multi-class
+        n_jobs=-1  # Use all cores for parallel processing
+    )
 
-# Train the model
-logger.info("Training the model with pipeline...")
-pipeline.fit(X_train, y_train)
+    random_search = RandomizedSearchCV(
+        estimator=xgb_model,
+        param_distributions=param_dist,
+        n_iter=50,  # Number of random combinations to try
+        cv=5,
+        scoring='accuracy',
+        n_jobs=-1,  # Use all CPU cores
+        random_state=42
+    )
 
-# Evaluate with cross-validation
-logger.info("Evaluating with cross-validation...")
-cv_pipeline = Pipeline(steps=[
-    ('model', RandomForestClassifier(random_state=42, class_weight=class_weights))
-])
-cv_scores = cross_val_score(cv_pipeline, X, y, cv=5, scoring='accuracy')
-logger.info(f"Cross-validation accuracy: {cv_scores.mean():.2f}")
+    random_search.fit(X_train, y_train)
+    print("Best parameters found: ", random_search.best_params_)
 
-# Evaluate the model on the test set
-logger.info("Evaluating the model on test set...")
-y_pred = pipeline.predict(X_test)
-accuracy = accuracy_score(y_test, y_pred)
-logger.info(f"Model Accuracy: {accuracy:.2f}")
+    # Train the model with the best parameters
+    print("Training the model...")
+    best_model = random_search.best_estimator_
+    best_model.fit(X_train, y_train)
 
-f1 = f1_score(y_test, y_pred, average='weighted')
-logger.info(f"F1 Score: {f1:.2f}")
+    # Evaluate the model
+    print("Evaluating the model...")
+    y_pred = best_model.predict(X_test)
+    accuracy = accuracy_score(y_test, y_pred)
+    print(f"Model Accuracy: {accuracy:.2f}")
+    print(classification_report(y_test, y_pred))
+    print("Confusion Matrix:")
+    print(confusion_matrix(y_test, y_pred))
 
-# Confusion Matrix and Classification Report
-conf_matrix = confusion_matrix(y_test, y_pred)
-logger.info(f"Confusion Matrix:\n{conf_matrix}")
-logger.info("Classification Report:\n" + classification_report(y_test, y_pred))
+    # Feature importance plot
+    print("Feature importance plot...")
+    feature_importances = best_model.feature_importances_
+    features = X.columns
+    sorted_idx = feature_importances.argsort()
 
-# Analyze feature importance
-logger.info("Analyzing feature importance...")
-model = pipeline.named_steps['model']
-feature_importance = pd.DataFrame({
-    'Feature': X.columns,
-    'Importance': model.feature_importances_
-}).sort_values(by='Importance', ascending=False)
-logger.info(f"Feature Importance:\n{feature_importance}")
+    plt.figure(figsize=(10, 6))
+    plt.barh(features[sorted_idx], feature_importances[sorted_idx])
+    plt.xlabel('Feature Importance')
+    plt.title('Feature Importance in Model')
+    plt.show()
 
-# Save the trained model and encoders
-logger.info("Saving the model and encoders...")
-joblib.dump(pipeline, os.path.join('static', 'models', 'location_recommender_model_rf.pkl'))
-joblib.dump(scaler, os.path.join('static', 'models', 'budget_scaler.pkl'))
+    # Save the trained model
+    print("Saving the model...")
+    os.makedirs(os.path.dirname(MODEL_PATH), exist_ok=True)
+    joblib.dump(best_model, MODEL_PATH)
+    print(f"Model saved to {MODEL_PATH}")
 
-# Save encoders for categorical variables
-for col, encoder in encoders.items():
-    joblib.dump(encoder, os.path.join('static', 'models', f'{col}_encoder.pkl'))
-
-# Save the foot_traffic encoder
-joblib.dump(foot_traffic_encoder, os.path.join('static', 'models', 'foot_traffic_encoder.pkl'))
-
-logger.info("Model and encoders have been saved to files.")
+if __name__ == "__main__":
+    try:
+        train_model()
+    except Exception as e:
+        print(f"Error during training: {e}")

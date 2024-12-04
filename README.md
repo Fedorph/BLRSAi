@@ -2,15 +2,15 @@
 ### Closed-Source Version `README.md`
 
 ```markdown
-# Situated
+# Pointar
 
-Welcome to **Situated** — the Business Location Recommendation System designed to empower your business with data-driven insights. Our platform is crafted to help you identify the perfect location for your business by analyzing a wide range of critical factors.
+Welcome to **Pointar** — the Business Location Recommendation System designed to empower your business with data-driven insights. Our platform is crafted to help you identify the perfect location for your business by analyzing a wide range of critical factors.
 
 ## Overview
 
-**Situated** is a proprietary software solution that leverages advanced algorithms and comprehensive data to recommend optimal business locations. By considering demographics, local competition, foot traffic, and economic indicators, Situated provides precise and actionable location insights.
+**Pointar** is a proprietary software solution that leverages advanced algorithms and comprehensive data to recommend optimal business locations. By considering demographics, local competition, foot traffic, and economic indicators, Pointar provides precise and actionable location insights.
 
-**Note:** This version of Situated is closed-source, and access to the codebase is restricted to authorized personnel only.
+**Note:** This version of Pointar is closed-source, and access to the codebase is restricted to authorized personnel only.
 
 ## Features
 
@@ -21,7 +21,7 @@ Welcome to **Situated** — the Business Location Recommendation System designed
 
 ## Installation
 
-To install and deploy **Situated**, please follow the instructions provided in your organization's deployment guide or contact the IT department for assistance.
+To install and deploy **Pointar**, please follow the instructions provided in your organization's deployment guide or contact the IT department for assistance.
 
 ## Usage
 
@@ -36,15 +36,15 @@ As this is a closed-source solution, access to the application and its features 
 
 ## Support
 
-For support and assistance with **Situated**, please reach out to our technical support team:
+For support and assistance with **Pointar**, please reach out to our technical support team:
 
-- **Email**: support@sarvince.com
-- **Website**: [www.sarvince.com](https://www.sarvince.com)
+- **Email**: support@fedorph.com
+- **Website**: [www.fedorph.com](https://www.fedorph.com)
 
 ## Licensing
 
-This software is proprietary and confidential. All rights are reserved by Sarvince. Unauthorized distribution or sharing of this software is strictly prohibited. For licensing inquiries, please contact us at licensing@sarvince.com.
+This software is proprietary and confidential. All rights are reserved by Fedorph. Unauthorized distribution or sharing of this software is strictly prohibited. For licensing inquiries, please contact us at licensing@fedorph.com.
 
 ## Acknowledgements
 
-Thank you for choosing **Situated** to help your business find the perfect location. We appreciate your trust in our solution and are committed to providing you with the best tools to succeed.
+Thank you for using **Pointar** to help your business find the perfect location. We appreciate your trust in our solution and are committed to providing you with the best tools to succeed.

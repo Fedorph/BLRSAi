@@ -2,15 +2,15 @@
 ### Closed-Source Version `README.md`
 
 ```markdown
-# Pointar
+# Spointed
 
-Welcome to **Pointar** — the Business Location Recommendation System designed to empower your business with data-driven insights. Our platform is crafted to help you identify the perfect location for your business by analyzing a wide range of critical factors.
+Welcome to **Spointed** — the Restaurant's Business Location Recommendation System designed to empower your business with data-driven insights. Our platform is crafted to help you identify the optimal location for your business by analyzing a wide range of critical factors.
 
 ## Overview
 
-**Pointar** is a proprietary software solution that leverages advanced algorithms and comprehensive data to recommend optimal business locations. By considering demographics, local competition, foot traffic, and economic indicators, Pointar provides precise and actionable location insights.
+**Spointed** is a proprietary software solution that leverages advanced algorithms and comprehensive data to recommend optimal business locations. By considering demographics, local competition, foot traffic, and economic indicators, Pointar provides precise and actionable location insights.
 
-**Note:** This version of Pointar is closed-source, and access to the codebase is restricted to authorized personnel only.
+**Note:** This version of Spointed is closed-source, and access to the codebase is restricted to authorized personnel only.
 
 ## Features
 
@@ -21,14 +21,14 @@ Welcome to **Pointar** — the Business Location Recommendation System designed 
 
 ## Installation
 
-To install and deploy **Pointar**, please follow the instructions provided in your organization's deployment guide or contact the IT department for assistance.
+To install and deploy **Spointed**, please follow the instructions provided in your organization's deployment guide or contact the IT department for assistance.
 
 ## Usage
 
 1. **Login**: Use your enterprise credentials to log into the system.
 2. **Configure Your Preferences**: Input business details and preferences to receive customized location recommendations.
 3. **Analyze Recommendations**: Review the suggested locations and accompanying reports.
-4. **Make Informed Decisions**: Utilize the data provided by Situated to select the ideal business location.
+4. **Make Informed Decisions**: Utilize the data provided by Spointed to select the ideal business location.
 
 ## Access and Permissions
 
@@ -38,13 +38,13 @@ As this is a closed-source solution, access to the application and its features 
 
 For support and assistance with **Pointar**, please reach out to our technical support team:
 
-- **Email**: support@fedorph.com
-- **Website**: [www.fedorph.com](https://www.fedorph.com)
+- **Email**: mail@spointed.com
+- **Website**: [www.spointed.com]
 
 ## Licensing
 
-This software is proprietary and confidential. All rights are reserved by Fedorph. Unauthorized distribution or sharing of this software is strictly prohibited. For licensing inquiries, please contact us at licensing@fedorph.com.
+This software is proprietary and confidential. All rights are reserved by Spointed. Unauthorized distribution or sharing of this software is strictly prohibited. For licensing inquiries, please contact us at licensing@spointed.com.
 
 ## Acknowledgements
 
-Thank you for using **Pointar** to help your business find the perfect location. We appreciate your trust in our solution and are committed to providing you with the best tools to succeed.
+Thank you for using **Spointed** to help your business find the optimal location. We appreciate your trust in our solution and are committed to providing you with the best tools to succeed.

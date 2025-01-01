@@ -4,7 +4,7 @@
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon/favicon.ico') }}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BLRS - Business Location Recommendation System</title>
+    <title>Spointed - Restaurant Business Location Recommendation System</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
     <script src="{{ url_for('static', filename='js/scripts.js') }}" defer></script>
@@ -12,14 +12,14 @@
 <body>
     <header class="header">
         <img src="{{ url_for('static', filename='logos/blrs.png') }}" height="70" width="70" alt="BLRS Logo" class="logo-img">
-        <h1>BLRS - Business Location Recommendation System</h1>
+        <h1>Spointed - Restaurant Business Location Recommendation System</h1>
     </header>
 
     <main class="content container">
         <div class="row mt-4">
             <!-- Form Section -->
             <section class="col-md-12 col-lg-6">
-                <h2>Location Finder</h2>
+                <h2>Spointed</h2>
                 <form @submit.prevent="submitForm">
                     <div class="form-group">
                         <label for="companyName">Company Name</label>
@@ -54,7 +54,7 @@
             </section>
             <!-- Recommendations Section -->
             <section class="col-md-12 col-lg-6">
-                <h2>Recommendations for Kaduna</h2>
+                <h2>Recommendations for {{ company_name }}</h2>
                 <ul class="list-group">
                     <li class="list-group-item" v-for="location in locations" :key="location.id">
                         <h3>{{ location.name }}</h3>
@@ -79,7 +79,7 @@
 
     <footer class="footer">
         <img src="{{ url_for('static', filename='logos/blrs.png') }}" height="45" width="45" alt="BLRS Logo" class="logo-img">
-        <p>BLRS - Business Location Recommendation System</p>
+        <p>Spointed - Restaurant Business Location Recommendation System</p>
     </footer>
 </body>
 </html>

@@ -1,4 +1,4 @@
-name,type,business_size,state,target_audience,foot_traffic,affordability,competitors,budget
+name,type,business_size,state,target_audience,foot_traffic,affordability,competition,budget
 Station Market by Kaduna Junction,traditional,small,Kaduna,low,high,high,moderate,400000
 Force Road by Independence Way,intercontinental,medium,Kaduna,high,high,moderate,high,2500000
 Ahmadu Bello Way by Jos Road,traditional,small,Kaduna,high,moderate,high,moderate,15000000
